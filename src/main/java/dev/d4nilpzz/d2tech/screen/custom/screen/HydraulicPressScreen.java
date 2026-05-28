@@ -39,6 +39,13 @@ public class HydraulicPressScreen extends AbstractContainerScreen<HydraulicPress
                 menu.blockEntity.getEnergyStorage(null).getEnergyStored(),
                 menu.blockEntity.getEnergyStorage(null).getMaxEnergyStored()
         );
+
+        int progress = menu.getProgress();
+        int maxProgress = menu.getMaxProgress();
+        if (maxProgress > 0 && progress > 0) {
+            int arrowWidth = (int) ((float) progress / maxProgress * 24);
+            guiGraphics.blit(GUI_TEXTURE, this.leftPos + 76, this.topPos + 18, 176, 0, arrowWidth, 16);
+        }
     }
 
     @Override

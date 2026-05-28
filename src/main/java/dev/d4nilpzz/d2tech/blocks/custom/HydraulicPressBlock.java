@@ -1,7 +1,6 @@
 package dev.d4nilpzz.d2tech.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
-import dev.d4nilpzz.d2tech.blocks.blockentity.CoalGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.HydraulicPressBlockEntity;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
 import net.minecraft.core.BlockPos;
@@ -35,13 +34,13 @@ public class HydraulicPressBlock extends BaseEntityBlock {
 
     public static final MapCodec<HydraulicPressBlock> CODEC = simpleCodec(HydraulicPressBlock::new);
 
-    public static final BooleanProperty GENERATING = BooleanProperty.create("generating");
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     public HydraulicPressBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(GENERATING, false).setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(ACTIVE, false).setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -52,8 +51,8 @@ public class HydraulicPressBlock extends BaseEntityBlock {
     @Override
     protected void onRemove(BlockState state, @NotNull Level level, @NotNull BlockPos pos, BlockState newState, boolean movedByPiston) {
         if(state.getBlock() != newState.getBlock()) {
-            if(level.getBlockEntity(pos) instanceof CoalGeneratorBlockEntity coalGeneratorBlockEntity) {
-                coalGeneratorBlockEntity.drops();
+            if(level.getBlockEntity(pos) instanceof HydraulicPressBlockEntity hydraulicPressBlockEntity) {
+                hydraulicPressBlockEntity.drops();
                 level.updateNeighbourForOutputSignal(pos, this);
             }
         }
@@ -69,7 +68,7 @@ public class HydraulicPressBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(GENERATING).add(FACING);
+        builder.add(ACTIVE).add(FACING);
     }
 
     @Override
@@ -81,13 +80,6 @@ public class HydraulicPressBlock extends BaseEntityBlock {
 
     @Override
     protected void tick(BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        boolean shouldGenerate = level.isDay();
-
-        if (state.getValue(GENERATING) != shouldGenerate) {
-            level.setBlock(pos, state.setValue(GENERATING, shouldGenerate), 3);
-        }
-
-
         level.scheduleTick(pos, this, 5);
     }
 

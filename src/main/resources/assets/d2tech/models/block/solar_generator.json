@@ -2,10 +2,10 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "d2tech:block/solar_panel_top",
-		"1": "d2tech:block/side_half",
-		"2": "d2tech:block/structure_block",
-		"particle": "d2tech:block/structure_block"
+		"0": "d2tech:block/solar_panel/top",
+		"1": "d2tech:block/solar_panel/side",
+		"2": "d2tech:block/solar_panel/bottom",
+		"particle": "d2tech:block/solar_panel/structure_block"
 	},
 	"elements": [
 		{
