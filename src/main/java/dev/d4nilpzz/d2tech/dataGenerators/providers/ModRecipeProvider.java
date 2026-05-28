@@ -1,0 +1,127 @@
+package dev.d4nilpzz.d2tech.dataGenerators.providers;
+
+import dev.d4nilpzz.d2tech.registry._Blocks;
+import dev.d4nilpzz.d2tech.registry._Items;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.common.conditions.IConditionBuilder;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import static dev.d4nilpzz.d2tech.D2tech.MODID;
+
+public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
+    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        super(output, registries);
+    }
+
+    @Override
+    protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
+        List<ItemLike> STEEL_SMELTABLES = List.of(_Items.RAW_STEEL,
+                _Blocks.STEEL_ORE, _Blocks.STEEL_DEEPSLATE_ORE);
+
+        List<ItemLike> PLASTIC_SMELTABLES = List.of(Items.SLIME_BALL);
+
+        oreSmelting(recipeOutput, STEEL_SMELTABLES, RecipeCategory.MISC, _Items.STEEL.get(), 0.25f, 200, "steel");
+        oreBlasting(recipeOutput, STEEL_SMELTABLES, RecipeCategory.MISC, _Items.STEEL.get(), 0.25f, 100, "steel");
+
+        oreBlasting(recipeOutput, PLASTIC_SMELTABLES, RecipeCategory.MISC, _Items.PLASTIC_PELLET.get(), 0.15f, 250, "plastic");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.STRUCTURE_BLOCK.get())
+                .pattern("BAB")
+                .pattern("ABA")
+                .pattern("BAB")
+                .define('A', _Items.STEEL.get())
+                .define('B', Items.IRON_INGOT)
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        // Chip
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.CHIP.get())
+                .pattern("RCR")
+                .pattern(" A ")
+                .define('A', _Items.PLASTIC_SHEET.get())
+                .define('R', Items.REDSTONE)
+                .define('C', Items.COPPER_INGOT)
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.ADVANCED_CHIP.get())
+                .pattern(" D ")
+                .pattern("RCR")
+                .pattern(" D ")
+                .define('R', Items.REDSTONE)
+                .define('D', Items.DIAMOND)
+                .define('C', _Items.CHIP.get())
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        // Machines
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.SOLAR_GENERATOR.get())
+                .pattern("PPP")
+                .pattern("CBC")
+                .pattern("SSS")
+                .define('P', Items.GLASS_PANE)
+                .define('C', _Items.CHIP.get())
+                .define('B', _Blocks.STRUCTURE_BLOCK.get())
+                .define('S', _Items.STEEL.get())
+                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.DECODE_COMPUTER.get())
+                .pattern("APP")
+                .pattern("CBC")
+                .pattern("SSS")
+                .define('P', Items.GLASS_PANE)
+                .define('C', _Items.CHIP.get())
+                .define('A', _Items.ALUMINUM.get())
+                .define('B', _Blocks.STRUCTURE_BLOCK.get())
+                .define('S', _Items.STEEL.get())
+                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.ANTENNA_BLOCK.get())
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', _Items.ALUMINUM.get())
+                .unlockedBy("has_aluminum", has(_Items.ALUMINUM)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HYDRAULIC_PRESS.get())
+                .pattern("CRC")
+                .pattern("CBC")
+                .pattern("SAS")
+                .define('A', Items.ANVIL)
+                .define('R', Items.REDSTONE)
+                .define('C', Items.IRON_INGOT)
+                .define('B', _Blocks.STRUCTURE_BLOCK.get())
+                .define('S', _Items.STEEL.get())
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.CABLE.get(), 4)
+                .pattern("SRS")
+                .define('S', _Items.STEEL.get())
+                .define('R', Items.REDSTONE)
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+    }
+
+    protected static void oreSmelting(@NotNull RecipeOutput recipeOutput, List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult,
+                                      float pExperience, int pCookingTIme, @NotNull String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.SMELTING_RECIPE, SmeltingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTIme, pGroup, "_from_smelting");
+    }
+
+    protected static void oreBlasting(@NotNull RecipeOutput recipeOutput, List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult,
+                                      float pExperience, int pCookingTime, @NotNull String pGroup) {
+        oreCooking(recipeOutput, RecipeSerializer.BLASTING_RECIPE, BlastingRecipe::new, pIngredients, pCategory, pResult,
+                pExperience, pCookingTime, pGroup, "_from_blasting");
+    }
+
+    protected static <T extends AbstractCookingRecipe> void oreCooking(@NotNull RecipeOutput recipeOutput, RecipeSerializer<T> pCookingSerializer, AbstractCookingRecipe.@NotNull Factory<T> factory,
+                                                                       List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult, float pExperience, int pCookingTime, @NotNull String pGroup, String pRecipeName) {
+        for(ItemLike itemlike : pIngredients) {
+            SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), pCategory, pResult, pExperience, pCookingTime, pCookingSerializer, factory).group(pGroup).unlockedBy(getHasName(itemlike), has(itemlike))
+                    .save(recipeOutput,MODID + ":" + getItemName(pResult) + pRecipeName + "_" + getItemName(itemlike));
+        }
+    }
+}

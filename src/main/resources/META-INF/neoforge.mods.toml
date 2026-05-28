@@ -1,0 +1,41 @@
+modLoader = "javafml"
+loaderVersion = "${loaderVersionRange}"
+license = "All Rights Reserveds"
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+
+[[mods]]
+modId = "d2tech"
+version = "${modVersion}"
+displayName = "d2tech"
+#updateJSONURL="https://change.me.example.invalid/updates.json"
+#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
+#logoFile="d2tech.png"
+#credits="" #optional
+authors = "d4nilpzz - Author | TonimatasDEV - Energy"
+
+description = '''
+
+'''
+
+#[[mixins]]
+#config="d2tech.mixins.json"
+
+#[[accessTransformers]]
+#file="META-INF/accesstransformer.cfg"
+
+[[dependencies.d2tech]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neoVersionRange}"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.d2tech]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraftVersion}]"
+ordering = "NONE"
+side = "BOTH"
+
+#[features.d2tech]
+#openGLVersion="[3.2,)"

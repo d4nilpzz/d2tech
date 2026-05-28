@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "d2tech:structure_block"
+    },
+    "C": {
+      "item": "d2tech:chip"
+    },
+    "P": {
+      "item": "minecraft:glass_pane"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "CBC",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:solar_generator"
+  }
+}

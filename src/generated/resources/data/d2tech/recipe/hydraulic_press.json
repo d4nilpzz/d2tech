@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:anvil"
+    },
+    "B": {
+      "item": "d2tech:structure_block"
+    },
+    "C": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    "CRC",
+    "CBC",
+    "SAS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:hydraulic_press"
+  }
+}

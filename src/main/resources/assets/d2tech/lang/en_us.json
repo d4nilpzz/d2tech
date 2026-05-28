@@ -1,0 +1,44 @@
+{
+  "itemGroup.d2tech": "d2tech",
+  "itemGroup.d2tech_ores": "d2tech Ores",
+
+  "tooltip.d2tech.item_extra_info": "Hold shift for more info.",
+
+  "block.d2tech.structure_block": "Structure Block",
+
+  "block.d2tech.steel_ore": "Steel Ore",
+  "block.d2tech.steel_deepslate_ore": "Deepslate Steel Ore",
+
+  "block.d2tech.aluminum_ore": "Aluminum Ore",
+  "block.d2tech.aluminum_deepslate_ore": "Deepslate Aluminum Ore",
+
+  "block.d2tech.solar_generator": "Solar Generator",
+  "block.d2tech.coal_generator": "Coal Generator",
+  "block.d2tech.heat_generator": "Heat Generator",
+
+  "block.d2tech.hydraulic_press": "Hydraulic Press",
+
+  "block.d2tech.cable": "Cable",
+
+  "block.d2tech.decode_computer": "Decode Computer",
+  "block.d2tech.antenna_block": "Antenna Block",
+  "block.d2tech.antenna_controller": "Antenna Controller",
+
+  "item.d2tech.raw_steel": "Raw Steel",
+  "item.d2tech.steel": "Steel Ingot",
+
+  "item.d2tech.raw_aluminum": "Raw Aluminum",
+  "item.d2tech.aluminum": "Aluminum Ingot",
+
+  "item.d2tech.chip": "Chip",
+  "item.d2tech.advanced_chip": "Advanced Chip",
+
+  "item.d2tech.battery": "Battery",
+
+  "item.d2tech.plastic_pellet": "Plastic Pellet",
+  "item.d2tech.plastic_sheet": "Plastic Sheet",
+
+  "item.d2tech.configurator": "Configurator",
+
+  "tooltip.d2tech.configurator": "Right Click the cables to configure them."
+}

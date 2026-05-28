@@ -1,0 +1,17 @@
+{
+  "values": [
+    "d2tech:structure_block",
+    "d2tech:steel_ore",
+    "d2tech:steel_deepslate_ore",
+    "d2tech:aluminum_ore",
+    "d2tech:aluminum_deepslate_ore",
+    "d2tech:solar_generator",
+    "d2tech:heat_generator",
+    "d2tech:hydraulic_press",
+    "d2tech:coal_generator",
+    "d2tech:cable",
+    "d2tech:decode_computer",
+    "d2tech:antenna_block",
+    "d2tech:antenna_controller"
+  ]
+}

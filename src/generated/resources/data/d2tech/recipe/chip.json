@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "d2tech:plastic_sheet"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "pattern": [
+    "RCR",
+    " A "
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:chip"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 250,
+  "experience": 0.15,
+  "group": "plastic",
+  "ingredient": {
+    "item": "minecraft:slime_ball"
+  },
+  "result": {
+    "count": 1,
+    "id": "d2tech:plastic_pellet"
+  }
+}

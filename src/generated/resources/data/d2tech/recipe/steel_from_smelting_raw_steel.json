@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 0.25,
+  "group": "steel",
+  "ingredient": {
+    "item": "d2tech:raw_steel"
+  },
+  "result": {
+    "count": 1,
+    "id": "d2tech:steel"
+  }
+}

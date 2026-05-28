@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    "SRS"
+  ],
+  "result": {
+    "count": 4,
+    "id": "d2tech:cable"
+  }
+}

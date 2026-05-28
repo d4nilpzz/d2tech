@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"up": "d2tech:block/coal_generator/top",
+		"down": "d2tech:block/coal_generator/bottom",
+		"north": "d2tech:block/coal_generator/front",
+		"south": "d2tech:block/coal_generator/back",
+		"east": "d2tech:block/coal_generator/side",
+		"west": "d2tech:block/coal_generator/side",
+		"particle": "d2tech:block/coal_generator/top"
+	}
+}

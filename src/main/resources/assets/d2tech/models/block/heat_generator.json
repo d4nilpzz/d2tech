@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "d2tech:block/top",
+    "down": "d2tech:block/structure_block",
+    "north": "d2tech:block/heat_generator",
+    "south": "d2tech:block/heat_generator",
+    "east": "d2tech:block/heat_generator",
+    "west": "d2tech:block/heat_generator",
+    "particle": "d2tech:block/top"
+  }
+}

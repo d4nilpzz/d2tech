@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "d2tech:block/hydraulic_press/top",
+    "down": "d2tech:block/hydraulic_press/bottom",
+    "north": "d2tech:block/hydraulic_press/front",
+    "south": "d2tech:block/hydraulic_press/back",
+    "east": "d2tech:block/hydraulic_press/side",
+    "west": "d2tech:block/hydraulic_press/side",
+    "particle": "d2tech:block/hydraulic_press/top"
+  }
+}

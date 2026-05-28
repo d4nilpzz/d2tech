@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "generating=true": { "model": "d2tech:block/solar_generator" },
+    "generating=false": { "model": "d2tech:block/solar_generator" }
+  }
+}

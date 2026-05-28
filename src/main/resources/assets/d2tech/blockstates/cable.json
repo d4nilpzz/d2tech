@@ -1,0 +1,44 @@
+{
+  "multipart": [
+    {
+      "when": { "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_inner" }
+    },
+    {
+      "when": { "north": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer" }
+    },
+    {
+      "when": { "south": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer", "y": 180 }
+    },
+    {
+      "when": { "east": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer", "y": 90 }
+    },
+    {
+      "when": { "west": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer", "y": 270 }
+    },
+    {
+      "when": { "up": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer", "x": -90 }
+    },
+    {
+      "when": { "down": "true", "straight": "false" },
+      "apply": { "model": "d2tech:block/cable_outer", "x": 90 }
+    },
+    {
+      "when": { "north": "true", "straight": "true" },
+      "apply": { "model": "d2tech:block/cable_straight" }
+    },
+    {
+      "when": { "east": "true", "straight": "true" },
+      "apply": { "model": "d2tech:block/cable_straight", "y": 90 }
+    },
+    {
+      "when": { "down": "true", "straight": "true" },
+      "apply": { "model": "d2tech:block/cable_straight", "x": 90 }
+    }
+  ]
+}
