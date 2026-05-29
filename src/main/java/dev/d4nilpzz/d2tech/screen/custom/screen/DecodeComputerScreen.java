@@ -74,7 +74,7 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
         for (int px = 0; px < w; px++) {
             double phase = (px / (double) w) * Math.PI * 2 * cycles + offset;
             int py = (int) (Math.sin(phase) * amp);
-            int py2 = (int) (Math.sin(phase + 0.8) * amp * 0.6);
+            int py2 = (int) (Math.sin(phase + 0.9) * amp * 0.8);
             guiGraphics.fill(bx + px, centerY + py, bx + px + 1, centerY + py + 1, WAVE_COLOR);
             guiGraphics.fill(bx + px, centerY + py2, bx + px + 1, centerY + py2 + 1, WAVE_COLOR);
         }
