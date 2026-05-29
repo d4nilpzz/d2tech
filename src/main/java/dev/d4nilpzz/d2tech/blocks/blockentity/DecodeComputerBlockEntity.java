@@ -73,8 +73,10 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
         System.out.println("[DC] setFrequency=" + frequency + " antLv=" + antennaLevel + " at " + getBlockPos());
         this.receivedFrequency = frequency;
         this.recipeIndex = Math.abs(frequency) % 4;
+        this.antennaLevel = 0;
         setChanged();
         if (level != null && !level.isClientSide()) {
+            level.setBlock(getBlockPos(), getBlockState().setValue(DecodeComputerBlock.ACTIVE, false), 3);
             level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     }
