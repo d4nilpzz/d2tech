@@ -35,7 +35,7 @@ public class CoalGeneratorBlockEntity extends BaseGeneratorBlockEntity implement
     @Override
     protected boolean isItemValidForSlot(int slot, @NotNull ItemStack stack) {
         return switch (slot) {
-            case BATTERY_SLOT -> stack.getItem() instanceof BatteryItem;
+            case BATTERY_SLOT -> Capabilities.EnergyStorage.ITEM.getCapability(stack, null) != null;
             case FUEL_SLOT -> FurnaceBlockEntity.isFuel(stack);
             default -> true;
         };

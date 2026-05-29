@@ -38,15 +38,15 @@ public class DecodeComputerBlock extends BaseEntityBlock {
 
     public static final MapCodec<DecodeComputerBlock> CODEC = simpleCodec(DecodeComputerBlock::new);
 
-    public static final BooleanProperty GENERATING = BooleanProperty.create("generating");
+    public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 6, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
 
     public DecodeComputerBlock(Properties properties) {
         super(properties.noOcclusion().dynamicShape());
-        this.registerDefaultState(this.stateDefinition.any().setValue(GENERATING, false).setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(ACTIVE, false).setValue(FACING, Direction.NORTH));
     }
 
     @Override
@@ -84,26 +84,19 @@ public class DecodeComputerBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(GENERATING).add(FACING);
+        builder.add(ACTIVE).add(FACING);
     }
 
     @Override
     public void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean moved) {
         if (!level.isClientSide) {
-            level.scheduleTick(pos, this, 5);
+            level.scheduleTick(pos, this, 20);
         }
     }
 
     @Override
     protected void tick(BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        boolean shouldGenerate = level.isDay();
 
-        if (state.getValue(GENERATING) != shouldGenerate) {
-            level.setBlock(pos, state.setValue(GENERATING, shouldGenerate), 3);
-        }
-
-
-        level.scheduleTick(pos, this, 5);
     }
 
     @Nullable

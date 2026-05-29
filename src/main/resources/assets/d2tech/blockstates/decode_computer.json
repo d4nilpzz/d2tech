@@ -1,8 +1,13 @@
 {
   "variants": {
-    "facing=north": { "model": "d2tech:block/decode_computer", "y": 0 },
-    "facing=east":  { "model": "d2tech:block/decode_computer", "y": 90 },
-    "facing=south": { "model": "d2tech:block/decode_computer", "y": 180 },
-    "facing=west":  { "model": "d2tech:block/decode_computer", "y": 270 }
+    "facing=north,active=false": { "model": "d2tech:block/decode_computer", "y": 0 },
+    "facing=east,active=false":  { "model": "d2tech:block/decode_computer", "y": 90 },
+    "facing=south,active=false": { "model": "d2tech:block/decode_computer", "y": 180 },
+    "facing=west,active=false":  { "model": "d2tech:block/decode_computer", "y": 270 },
+
+    "facing=north,active=true": { "model": "d2tech:block/decode_computer_active", "y": 0 },
+    "facing=east,active=true":  { "model": "d2tech:block/decode_computer_active", "y": 90 },
+    "facing=south,active=true": { "model": "d2tech:block/decode_computer_active", "y": 180 },
+    "facing=west,active=true":  { "model": "d2tech:block/decode_computer_active", "y": 270 }
   }
 }

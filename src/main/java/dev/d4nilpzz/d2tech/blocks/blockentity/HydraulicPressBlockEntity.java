@@ -56,7 +56,7 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
                         .getRecipeFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get(), new HydraulicPressRecipeInput(stack), getLevel())
                         .isPresent();
                 case OUTPUT_SLOT -> false;
-                case BATTERY_SLOT -> stack.getItem() instanceof BatteryItem;
+                case BATTERY_SLOT -> Capabilities.EnergyStorage.ITEM.getCapability(stack, null) != null;
                 default -> super.isItemValid(slot, stack);
             };
         }

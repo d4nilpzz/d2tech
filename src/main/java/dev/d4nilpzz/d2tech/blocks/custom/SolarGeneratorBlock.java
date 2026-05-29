@@ -35,7 +35,7 @@ public class SolarGeneratorBlock extends BaseEntityBlock {
 
     public static final BooleanProperty GENERATING = BooleanProperty.create("generating");
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 8, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 7, 16);
 
     public SolarGeneratorBlock(Properties properties) {
         super(properties.dynamicShape().noOcclusion().forceSolidOn());

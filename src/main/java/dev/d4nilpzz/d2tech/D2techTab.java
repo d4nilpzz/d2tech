@@ -28,8 +28,8 @@ public class D2techTab {
                         output.accept(_Blocks.ANTENNA_CONTROLLER.get());
                         output.accept(_Blocks.HYDRAULIC_PRESS.get());
                         output.accept(_Blocks.COAL_GENERATOR.get());
-                        output.accept(_Blocks.SOLAR_GENERATOR.get());
                         output.accept(_Blocks.DECODE_COMPUTER.get());
+                        output.accept(_Blocks.SOLAR_GENERATOR.get());
                         output.accept(_Blocks.CABLE.get());
                         output.accept(_Items.CONFIGURATOR.get());
                         output.accept(_Items.PLASTIC_PELLET.get());

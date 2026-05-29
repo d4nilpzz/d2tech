@@ -5,17 +5,17 @@
 		"0": "d2tech:block/solar_panel/top",
 		"1": "d2tech:block/solar_panel/side",
 		"2": "d2tech:block/solar_panel/bottom",
-		"particle": "d2tech:block/solar_panel/structure_block"
+		"particle": "d2tech:block/solar_panel/bottom"
 	},
 	"elements": [
 		{
 			"from": [0, 0, 0],
-			"to": [16, 8, 16],
+			"to": [16, 7, 16],
 			"faces": {
-				"north": {"uv": [0, 8, 16, 16], "texture": "#1"},
-				"east": {"uv": [0, 8, 16, 16], "texture": "#1"},
-				"south": {"uv": [0, 8, 16, 16], "texture": "#1"},
-				"west": {"uv": [0, 8, 16, 16], "texture": "#1"},
+				"north": {"uv": [0, 9, 16, 16], "texture": "#1"},
+				"east": {"uv": [0, 9, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 9, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 9, 16, 16], "texture": "#1"},
 				"up": {"uv": [0, 0, 16, 16], "texture": "#0"},
 				"down": {"uv": [0, 0, 16, 16], "texture": "#2"}
 			}

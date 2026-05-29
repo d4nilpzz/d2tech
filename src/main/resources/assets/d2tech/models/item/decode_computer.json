@@ -1,3 +1,12 @@
 {
-  "parent": "d2tech:block/decode_computer"
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "d2tech:block/decode_computer/top",
+    "down": "d2tech:block/decode_computer/bottom",
+    "north": "d2tech:block/decode_computer/front",
+    "south": "d2tech:block/decode_computer/back",
+    "east": "d2tech:block/decode_computer/side",
+    "west": "d2tech:block/decode_computer/side",
+    "particle": "d2tech:block/decode_computer/top"
+  }
 }
