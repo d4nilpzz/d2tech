@@ -60,12 +60,21 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
         int bx = this.leftPos + 48;
         int by = this.topPos + 15;
         int centerY = by + 4;
-        int w = 24;
+        int w = 40;
+        long time = minecraft != null ? minecraft.level != null ? minecraft.level.getGameTime() : 0 : 0;
+        double offset = (time % 20) / 20.0 * Math.PI * 2;
+
+        int val = sliderValue >= 0 ? sliderValue : Math.max(menu.blockEntity.getReceivedFrequency(), 1);
+        if (val < 1) val = 1;
+        if (val > POSITIONS) val = POSITIONS;
+
+        double cycles = 1.0 + (POSITIONS - val) * 3.0 / (POSITIONS - 1);
+        double amp = 1.0 + (POSITIONS - val) * 4.0 / (POSITIONS - 1);
 
         for (int px = 0; px < w; px++) {
-            double phase = (px / (double) w) * Math.PI * 4;
-            int py = (int) (Math.sin(phase) * 3);
-            int py2 = (int) (Math.sin(phase + 0.8) * 2);
+            double phase = (px / (double) w) * Math.PI * 2 * cycles + offset;
+            int py = (int) (Math.sin(phase) * amp);
+            int py2 = (int) (Math.sin(phase + 0.8) * amp * 0.6);
             guiGraphics.fill(bx + px, centerY + py, bx + px + 1, centerY + py + 1, WAVE_COLOR);
             guiGraphics.fill(bx + px, centerY + py2, bx + px + 1, centerY + py2 + 1, WAVE_COLOR);
         }
