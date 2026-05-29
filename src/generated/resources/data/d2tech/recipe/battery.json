@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    " S ",
+    "RCR",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:battery"
+  }
+}

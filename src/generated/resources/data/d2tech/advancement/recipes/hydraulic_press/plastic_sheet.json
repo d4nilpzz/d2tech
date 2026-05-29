@@ -1,11 +1,10 @@
 {
-  "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_plastic_sheet": {
+    "has_plastic_pellet": {
       "conditions": {
         "items": [
           {
-            "items": "d2tech:plastic_sheet"
+            "items": "d2tech:plastic_pellet"
           }
         ]
       },
@@ -13,7 +12,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "d2tech:chip"
+        "recipe": "d2tech:hydraulic_press/plastic_sheet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +20,13 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_plastic_sheet"
+      "has_plastic_pellet"
     ]
   ],
   "rewards": {
     "recipes": [
-      "d2tech:chip"
+      "d2tech:hydraulic_press/plastic_sheet"
     ]
-  }
+  },
+  "sends_telemetry_event": true
 }

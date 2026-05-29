@@ -1,0 +1,12 @@
+{
+  "type": "d2tech:hydraulic_press",
+  "energy": 1000,
+  "ingredient": {
+    "item": "d2tech:plastic_pellet"
+  },
+  "result": {
+    "count": 1,
+    "id": "d2tech:plastic_sheet"
+  },
+  "time": 100
+}

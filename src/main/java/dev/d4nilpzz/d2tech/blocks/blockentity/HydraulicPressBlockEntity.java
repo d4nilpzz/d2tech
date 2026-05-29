@@ -2,8 +2,10 @@ package dev.d4nilpzz.d2tech.blocks.blockentity;
 
 import dev.d4nilpzz.d2tech.blocks.custom.HydraulicPressBlock;
 import dev.d4nilpzz.d2tech.energy.ModEnergyStorage;
+import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipe;
+import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipeInput;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
-import dev.d4nilpzz.d2tech.registry._Items;
+import dev.d4nilpzz.d2tech.registry._RecipeTypes;
 import dev.d4nilpzz.d2tech.screen.custom.HydraulicPressMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -30,14 +33,13 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final int INPUT_SLOT = 0;
     private static final int OUTPUT_SLOT = 1;
     private static final int BATTERY_SLOT = 2;
-    private static final int MAX_PROGRESS = 100;
-    private static final int ENERGY_PER_TICK = 10;
 
     public final ItemStackHandler inventory = new ItemStackHandler(3) {
         @Override
@@ -48,7 +50,9 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return switch (slot) {
-                case INPUT_SLOT -> stack.is(_Items.PLASTIC_PELLET.get());
+                case INPUT_SLOT -> getLevel() != null && getLevel().getRecipeManager()
+                        .getRecipeFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get(), new HydraulicPressRecipeInput(stack), getLevel())
+                        .isPresent();
                 case OUTPUT_SLOT -> false;
                 case BATTERY_SLOT -> true;
                 default -> super.isItemValid(slot, stack);
@@ -77,7 +81,8 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
     }
 
     private int progress;
-    private int maxProgress = MAX_PROGRESS;
+    private int maxProgress;
+    private int energyPerTick;
 
     public final ContainerData containerData = new ContainerData() {
         @Override
@@ -122,6 +127,8 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
         tag.put("inventory", inventory.serializeNBT(registries));
         tag.putInt("hydraulic_press.energy", ENERGY_STORAGE.getEnergyStored());
         tag.putInt("hydraulic_press.progress", progress);
+        tag.putInt("hydraulic_press.max_progress", maxProgress);
+        tag.putInt("hydraulic_press.energy_per_tick", energyPerTick);
     }
 
     @Override
@@ -130,6 +137,8 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
         ENERGY_STORAGE.setEnergy(tag.getInt("hydraulic_press.energy"));
         progress = tag.getInt("hydraulic_press.progress");
+        maxProgress = tag.getInt("hydraulic_press.max_progress");
+        energyPerTick = tag.getInt("hydraulic_press.energy_per_tick");
     }
 
     @Nullable
@@ -162,48 +171,57 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
         return this.inventory;
     }
 
-    public boolean isActive() {
-        return progress > 0;
+    private Optional<RecipeHolder<HydraulicPressRecipe>> getCurrentRecipe() {
+        if (level == null) return Optional.empty();
+        ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
+        return level.getRecipeManager()
+                .getRecipeFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get(), new HydraulicPressRecipeInput(input), level);
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState state) {
         if (level.isClientSide) return;
 
         boolean active = progress > 0;
-
-        ItemStack input = inventory.getStackInSlot(INPUT_SLOT);
         ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
-        boolean canProcess = canProcess(input, output);
 
-        if (canProcess && ENERGY_STORAGE.getEnergyStored() >= ENERGY_PER_TICK) {
-            ENERGY_STORAGE.internalExtract(ENERGY_PER_TICK, false);
-            progress++;
+        Optional<RecipeHolder<HydraulicPressRecipe>> recipeHolder = getCurrentRecipe();
 
-            if (progress >= maxProgress) {
-                input.shrink(1);
-                if (output.isEmpty()) {
-                    inventory.setStackInSlot(OUTPUT_SLOT, new ItemStack(_Items.PLASTIC_SHEET.get()));
-                } else {
-                    output.grow(1);
+        if (recipeHolder.isPresent()) {
+            HydraulicPressRecipe recipe = recipeHolder.get().value();
+            ItemStack result = recipe.getResultItem(null);
+
+            if (maxProgress == 0) {
+                maxProgress = recipe.time();
+                energyPerTick = Math.max(1, recipe.energy() / recipe.time());
+            }
+
+            boolean canOutput = output.isEmpty()
+                    || (output.is(result.getItem()) && output.getCount() + result.getCount() <= output.getMaxStackSize());
+
+            if (canOutput && ENERGY_STORAGE.getEnergyStored() >= energyPerTick) {
+                ENERGY_STORAGE.internalExtract(energyPerTick, false);
+                progress++;
+
+                if (progress >= maxProgress) {
+                    inventory.getStackInSlot(INPUT_SLOT).shrink(1);
+                    if (output.isEmpty()) {
+                        inventory.setStackInSlot(OUTPUT_SLOT, result.copy());
+                    } else {
+                        output.grow(result.getCount());
+                    }
+                    progress = 0;
+                    maxProgress = 0;
                 }
-                progress = 0;
+            } else if (progress > 0) {
+                progress--;
             }
         } else {
             if (progress > 0) progress--;
+            else maxProgress = 0;
         }
 
         if (state.getValue(HydraulicPressBlock.ACTIVE) != active) {
             level.setBlock(blockPos, state.setValue(HydraulicPressBlock.ACTIVE, active), 3);
         }
-    }
-
-    private boolean canProcess(ItemStack input, ItemStack output) {
-        if (input.isEmpty()) return false;
-        if (!input.is(_Items.PLASTIC_PELLET.get())) return false;
-
-        ItemStack result = new ItemStack(_Items.PLASTIC_SHEET.get());
-        if (output.isEmpty()) return true;
-        if (!output.is(result.getItem())) return false;
-        return output.getCount() + result.getCount() <= output.getMaxStackSize();
     }
 }

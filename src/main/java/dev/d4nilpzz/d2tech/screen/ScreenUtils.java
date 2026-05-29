@@ -23,6 +23,7 @@ public class ScreenUtils {
     public static final ResourceLocation ENERGY_TEXTURE = ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/energy.png");
     public static final ResourceLocation COAL_TEXTURE = ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/coal.png");
     public static final ResourceLocation ASCII_TEXTURE = ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/ascii_sga.png");
+    public static final ResourceLocation PROCESS_V_TEXTURE = ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/process_v.png");
 
     public static boolean isHovering(Rectangle bounds, double x, double y) {
         double left = bounds.getX();

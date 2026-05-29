@@ -11,12 +11,17 @@ val parchmentMappingsVersion: String by extra
 val parchmentMinecraftVersion: String by extra
 val neoVersionRange: String by extra
 val loaderVersionRange: String by extra
+val jeiVersion: String by extra
 
 version = modVersion
 group = "dev.d4nilpzz"
 
 repositories {
     mavenLocal()
+    maven {
+        name = "JEI"
+        url = uri("https://maven.blamejared.com")
+    }
 }
 
 base {
@@ -74,6 +79,9 @@ sourceSets.main.get().resources { srcDir("src/generated/resources") }
 
 
 dependencies {
+    // JEI (soft dependency)
+    compileOnly("mezz.jei:jei-1.21.1-neoforge:${jeiVersion}")
+    runtimeOnly("mezz.jei:jei-1.21.1-neoforge:${jeiVersion}")
 }
 
 tasks.processResources {

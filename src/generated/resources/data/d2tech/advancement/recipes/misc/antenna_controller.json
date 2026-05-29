@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_plastic_sheet": {
+    "has_antenna_block": {
       "conditions": {
         "items": [
           {
-            "items": "d2tech:plastic_sheet"
+            "items": "d2tech:antenna_block"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "d2tech:chip"
+        "recipe": "d2tech:antenna_controller"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_plastic_sheet"
+      "has_antenna_block"
     ]
   ],
   "rewards": {
     "recipes": [
-      "d2tech:chip"
+      "d2tech:antenna_controller"
     ]
   }
 }

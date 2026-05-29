@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
 import dev.d4nilpzz.d2tech.registry._Blocks;
 import dev.d4nilpzz.d2tech.registry._Items;
+import dev.d4nilpzz.d2tech.registry._RecipeTypes;
 import dev.d4nilpzz.d2tech.screen._MenuTypes;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -21,6 +22,7 @@ public class D2tech {
         _Blocks.register(modEventBus);
         _BlockEntities.register(modEventBus);
         _MenuTypes.register(modEventBus);
+        _RecipeTypes.register(modEventBus);
 
         D2techTab.register(modEventBus);
         

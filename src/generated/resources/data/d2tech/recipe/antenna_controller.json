@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "d2tech:aluminum"
+    },
+    "B": {
+      "item": "d2tech:antenna_block"
+    },
+    "C": {
+      "item": "d2tech:chip"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "BCB",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:antenna_controller"
+  }
+}

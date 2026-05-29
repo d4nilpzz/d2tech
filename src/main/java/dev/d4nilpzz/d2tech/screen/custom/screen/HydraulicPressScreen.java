@@ -43,8 +43,9 @@ public class HydraulicPressScreen extends AbstractContainerScreen<HydraulicPress
         int progress = menu.getProgress();
         int maxProgress = menu.getMaxProgress();
         if (maxProgress > 0 && progress > 0) {
-            int arrowWidth = (int) ((float) progress / maxProgress * 24);
-            guiGraphics.blit(GUI_TEXTURE, this.leftPos + 76, this.topPos + 18, 176, 0, arrowWidth, 16);
+            double ratio = (double) progress / maxProgress;
+            int filledHeight = (int) Math.ceil(14 * ratio);
+            guiGraphics.blit(ScreenUtils.PROCESS_V_TEXTURE, this.leftPos + 74, this.topPos + 40, 0, 0, 10, filledHeight, 10, 14);
         }
     }
 

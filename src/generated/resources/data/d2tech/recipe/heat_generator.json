@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blast_furnace"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    "SBS",
+    "SFS",
+    "SBS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:heat_generator"
+  }
+}

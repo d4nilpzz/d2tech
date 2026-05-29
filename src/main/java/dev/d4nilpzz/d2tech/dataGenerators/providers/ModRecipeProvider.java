@@ -1,10 +1,12 @@
 package dev.d4nilpzz.d2tech.dataGenerators.providers;
 
+import dev.d4nilpzz.d2tech.dataGenerators.builders.HydraulicPressRecipeBuilder;
 import dev.d4nilpzz.d2tech.registry._Blocks;
 import dev.d4nilpzz.d2tech.registry._Items;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
@@ -26,13 +28,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         List<ItemLike> STEEL_SMELTABLES = List.of(_Items.RAW_STEEL,
                 _Blocks.STEEL_ORE, _Blocks.STEEL_DEEPSLATE_ORE);
 
+        List<ItemLike> ALUMINUM_SMELTABLES = List.of(_Items.RAW_ALUMINUM,
+                _Blocks.ALUMINUM_ORE, _Blocks.ALUMINUM_DEEPSLATE_ORE);
+
         List<ItemLike> PLASTIC_SMELTABLES = List.of(Items.SLIME_BALL);
 
+        // Steel smelting
         oreSmelting(recipeOutput, STEEL_SMELTABLES, RecipeCategory.MISC, _Items.STEEL.get(), 0.25f, 200, "steel");
         oreBlasting(recipeOutput, STEEL_SMELTABLES, RecipeCategory.MISC, _Items.STEEL.get(), 0.25f, 100, "steel");
 
+        // Aluminum smelting
+        oreSmelting(recipeOutput, ALUMINUM_SMELTABLES, RecipeCategory.MISC, _Items.ALUMINUM.get(), 0.25f, 200, "aluminum");
+        oreBlasting(recipeOutput, ALUMINUM_SMELTABLES, RecipeCategory.MISC, _Items.ALUMINUM.get(), 0.25f, 100, "aluminum");
+
+        // Plastic
         oreBlasting(recipeOutput, PLASTIC_SMELTABLES, RecipeCategory.MISC, _Items.PLASTIC_PELLET.get(), 0.15f, 250, "plastic");
 
+        // Structure Block
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.STRUCTURE_BLOCK.get())
                 .pattern("BAB")
                 .pattern("ABA")
@@ -48,7 +60,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('A', _Items.PLASTIC_SHEET.get())
                 .define('R', Items.REDSTONE)
                 .define('C', Items.COPPER_INGOT)
-                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+                .unlockedBy("has_plastic_sheet", has(_Items.PLASTIC_SHEET)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.ADVANCED_CHIP.get())
                 .pattern(" D ")
@@ -57,6 +69,16 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('R', Items.REDSTONE)
                 .define('D', Items.DIAMOND)
                 .define('C', _Items.CHIP.get())
+                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
+        // Battery
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.BATTERY.get())
+                .pattern(" S ")
+                .pattern("RCR")
+                .pattern(" S ")
+                .define('S', _Items.STEEL.get())
+                .define('R', Items.REDSTONE)
+                .define('C', Items.COPPER_INGOT)
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
         // Machines
@@ -69,6 +91,26 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('S', _Items.STEEL.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.COAL_GENERATOR.get())
+                .pattern("SFS")
+                .pattern("CBC")
+                .pattern("SIS")
+                .define('S', _Items.STEEL.get())
+                .define('F', Items.FURNACE)
+                .define('C', _Items.CHIP.get())
+                .define('B', _Blocks.STRUCTURE_BLOCK.get())
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HEAT_GENERATOR.get())
+                .pattern("SBS")
+                .pattern("SFS")
+                .pattern("SBS")
+                .define('S', _Items.STEEL.get())
+                .define('B', Items.BLAST_FURNACE)
+                .define('F', Items.FURNACE)
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.DECODE_COMPUTER.get())
                 .pattern("APP")
@@ -87,6 +129,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('B', _Items.ALUMINUM.get())
                 .unlockedBy("has_aluminum", has(_Items.ALUMINUM)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.ANTENNA_CONTROLLER.get())
+                .pattern("AAA")
+                .pattern("BCB")
+                .pattern("AAA")
+                .define('A', _Items.ALUMINUM.get())
+                .define('B', _Blocks.ANTENNA_BLOCK.get())
+                .define('C', _Items.CHIP.get())
+                .unlockedBy("has_antenna_block", has(_Blocks.ANTENNA_BLOCK)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HYDRAULIC_PRESS.get())
                 .pattern("CRC")
                 .pattern("CBC")
@@ -103,6 +154,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', _Items.STEEL.get())
                 .define('R', Items.REDSTONE)
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        // Hydraulic Press recipes
+        HydraulicPressRecipeBuilder.press(
+                        Ingredient.of(_Items.PLASTIC_PELLET.get()),
+                        new ItemStack(_Items.PLASTIC_SHEET.get()),
+                        1000, 100
+                )
+                .unlockedBy("has_plastic_pellet", has(_Items.PLASTIC_PELLET))
+                .save(recipeOutput);
     }
 
     protected static void oreSmelting(@NotNull RecipeOutput recipeOutput, List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult,
