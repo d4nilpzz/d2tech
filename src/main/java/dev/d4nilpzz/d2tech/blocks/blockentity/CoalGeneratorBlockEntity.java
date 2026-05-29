@@ -2,6 +2,7 @@ package dev.d4nilpzz.d2tech.blocks.blockentity;
 
 import dev.d4nilpzz.d2tech.blocks.base.BaseGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.energy.EnergyUtils;
+import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
 import dev.d4nilpzz.d2tech.screen.custom.CoalGeneratorMenu;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.energy.IEnergyStorage;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -28,6 +31,15 @@ public class CoalGeneratorBlockEntity extends BaseGeneratorBlockEntity implement
     private final ContainerData containerData;
     private int maxBurnTime;
     private int burnTime;
+
+    @Override
+    protected boolean isItemValidForSlot(int slot, @NotNull ItemStack stack) {
+        return switch (slot) {
+            case BATTERY_SLOT -> stack.getItem() instanceof BatteryItem;
+            case FUEL_SLOT -> FurnaceBlockEntity.isFuel(stack);
+            default -> true;
+        };
+    }
 
     public CoalGeneratorBlockEntity(BlockPos pos, BlockState state) {
         super(_BlockEntities.COAL_GENERATOR_BE.get(), pos, state, 20000, 0, 200, 2, "coal_generator");
@@ -98,6 +110,23 @@ public class CoalGeneratorBlockEntity extends BaseGeneratorBlockEntity implement
             }
         }
 
+        chargeBattery();
+
         EnergyUtils.distributeNearly(this, ENERGY_STORAGE, 100);
+    }
+
+    private void chargeBattery() {
+        ItemStack batteryStack = inventory.getStackInSlot(BATTERY_SLOT);
+        if (batteryStack.isEmpty()) return;
+
+        IEnergyStorage batteryCap = Capabilities.EnergyStorage.ITEM.getCapability(batteryStack, null);
+        if (batteryCap == null) return;
+
+        int canExtract = Math.min(ENERGY_STORAGE.getEnergyStored(), BatteryItem.MAX_TRANSFER);
+        int received = batteryCap.receiveEnergy(canExtract, true);
+        if (received > 0) {
+            ENERGY_STORAGE.internalExtract(received, false);
+            batteryCap.receiveEnergy(received, false);
+        }
     }
 }

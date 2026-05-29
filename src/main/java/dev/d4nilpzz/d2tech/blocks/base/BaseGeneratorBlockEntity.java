@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,6 +39,11 @@ public abstract class BaseGeneratorBlockEntity extends BlockEntity {
         super(type, pos, state);
 
         this.inventory = new ItemStackHandler(inventorySize) {
+            @Override
+            public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+                return BaseGeneratorBlockEntity.this.isItemValidForSlot(slot, stack);
+            }
+
             @Override
             protected void onContentsChanged(int slot) {
                 setChanged();
@@ -102,6 +108,10 @@ public abstract class BaseGeneratorBlockEntity extends BlockEntity {
 
     public IItemHandler getItemHandler(@Nullable Direction direction) {
         return inventory;
+    }
+
+    protected boolean isItemValidForSlot(int slot, @NotNull ItemStack stack) {
+        return true;
     }
 
     public abstract void tick(Level level, BlockPos pos, BlockState state);

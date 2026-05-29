@@ -2,6 +2,7 @@ package dev.d4nilpzz.d2tech.blocks.blockentity;
 
 import dev.d4nilpzz.d2tech.blocks.custom.HydraulicPressBlock;
 import dev.d4nilpzz.d2tech.energy.ModEnergyStorage;
+import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
 import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipe;
 import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipeInput;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.energy.IEnergyStorage;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -54,7 +56,7 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
                         .getRecipeFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get(), new HydraulicPressRecipeInput(stack), getLevel())
                         .isPresent();
                 case OUTPUT_SLOT -> false;
-                case BATTERY_SLOT -> true;
+                case BATTERY_SLOT -> stack.getItem() instanceof BatteryItem;
                 default -> super.isItemValid(slot, stack);
             };
         }
@@ -178,6 +180,33 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
                 .getRecipeFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get(), new HydraulicPressRecipeInput(input), level);
     }
 
+    private void chargeBattery() {
+        ItemStack batteryStack = inventory.getStackInSlot(BATTERY_SLOT);
+        if (batteryStack.isEmpty()) return;
+
+        IEnergyStorage batteryCap = Capabilities.EnergyStorage.ITEM.getCapability(batteryStack, null);
+        if (batteryCap == null) return;
+
+        // Discharge battery into machine if machine needs energy
+        int machineRoom = ENERGY_STORAGE.getMaxEnergyStored() - ENERGY_STORAGE.getEnergyStored();
+        if (machineRoom > 0) {
+            int extracted = batteryCap.extractEnergy(Math.min(machineRoom, BatteryItem.MAX_TRANSFER), true);
+            if (extracted > 0) {
+                batteryCap.extractEnergy(extracted, false);
+                ENERGY_STORAGE.internalReceive(extracted, false);
+            }
+            return;
+        }
+
+        // Charge battery from machine if machine has surplus
+        int canExtract = Math.min(ENERGY_STORAGE.getEnergyStored(), BatteryItem.MAX_TRANSFER);
+        int received = batteryCap.receiveEnergy(canExtract, true);
+        if (received > 0) {
+            ENERGY_STORAGE.internalExtract(received, false);
+            batteryCap.receiveEnergy(received, false);
+        }
+    }
+
     public void tick(Level level, BlockPos blockPos, BlockState state) {
         if (level.isClientSide) return;
 
@@ -219,6 +248,8 @@ public class HydraulicPressBlockEntity extends BlockEntity implements MenuProvid
             if (progress > 0) progress--;
             else maxProgress = 0;
         }
+
+        chargeBattery();
 
         if (state.getValue(HydraulicPressBlock.ACTIVE) != active) {
             level.setBlock(blockPos, state.setValue(HydraulicPressBlock.ACTIVE, active), 3);
