@@ -88,7 +88,7 @@ public class ScreenUtils {
         graphics.blit(resource, x, y + remainHeight, 0.0F, (float)remainHeight, width, ratioHeight, width, height);
     }
 
-    private static String formatFE(long value) {
+    public static String formatFE(long value) {
         if (value >= 1_000_000_000_000L)
             return String.format("%.0fT", value / 1_000_000_000_000.0);
         if (value >= 1_000_000_000L)

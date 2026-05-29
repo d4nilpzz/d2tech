@@ -100,7 +100,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('F', Items.FURNACE)
                 .define('C', _Items.CHIP.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
-                .define('I', Items.IRON_INGOT)
                 .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 

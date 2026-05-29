@@ -1,5 +1,7 @@
 package dev.d4nilpzz.d2tech.registry;
 
+import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
+import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
 import dev.d4nilpzz.d2tech.item.custom.Configurator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -31,8 +33,8 @@ public class _Items {
     public static final DeferredItem<Item> ADVANCED_SPACE_SHIP = ITEMS.register("advanced_space_ship",
             () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> BATTERY = ITEMS.register("battery",
-            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<BatteryItem> BATTERY = ITEMS.register("battery",
+            () -> new BatteryItem(new Item.Properties().stacksTo(1)));
 
     // Plastic
     public static final DeferredItem<Item> PLASTIC_PELLET = ITEMS.register("plastic_pellet",

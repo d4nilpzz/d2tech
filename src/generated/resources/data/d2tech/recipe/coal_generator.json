@@ -11,8 +11,8 @@
     "F": {
       "item": "minecraft:furnace"
     },
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "G": {
+      "item": "d2tech:battery"
     },
     "S": {
       "item": "d2tech:steel"
@@ -20,8 +20,8 @@
   },
   "pattern": [
     "SFS",
-    "CBC",
-    "SIS"
+    "CBG",
+    "SFS"
   ],
   "result": {
     "count": 1,

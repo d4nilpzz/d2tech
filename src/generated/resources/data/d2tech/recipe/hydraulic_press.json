@@ -9,19 +9,19 @@
       "item": "d2tech:structure_block"
     },
     "C": {
-      "item": "minecraft:iron_ingot"
+      "item": "d2tech:aluminum"
     },
-    "R": {
-      "item": "minecraft:redstone"
+    "G": {
+      "item": "d2tech:battery"
     },
     "S": {
       "item": "d2tech:steel"
     }
   },
   "pattern": [
-    "CRC",
-    "CBC",
-    "SAS"
+    "CAC",
+    "CBG",
+    "SGS"
   ],
   "result": {
     "count": 1,

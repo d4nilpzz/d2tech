@@ -2,20 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "C": {
-      "item": "d2tech:chip"
+    "A": {
+      "item": "d2tech:plastic_sheet"
     },
-    "D": {
-      "item": "minecraft:diamond"
-    },
-    "R": {
-      "item": "minecraft:redstone"
+    "B": {
+      "item": "minecraft:gold_ingot"
     }
   },
   "pattern": [
-    " D ",
-    "RCR",
-    " D "
+    " B ",
+    "BAB",
+    " B "
   ],
   "result": {
     "count": 1,
