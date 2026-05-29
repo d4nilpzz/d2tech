@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.registry;
 
+import dev.d4nilpzz.d2tech.blocks.blockentity.AntennaControllerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.CoalGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.DecodeComputerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.HydraulicPressBlockEntity;
@@ -32,6 +33,10 @@ public class _BlockEntities {
     public static final Supplier<BlockEntityType<DecodeComputerBlockEntity>> DECODE_COMPUTER_BE =
             BLOCK_ENTITIES.register("decode_computer", () -> BlockEntityType.Builder.of(
                     DecodeComputerBlockEntity::new, _Blocks.DECODE_COMPUTER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<AntennaControllerBlockEntity>> ANTENNA_CONTROLLER_BE =
+            BLOCK_ENTITIES.register("antenna_controller", () -> BlockEntityType.Builder.of(
+                    AntennaControllerBlockEntity::new, _Blocks.ANTENNA_CONTROLLER.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

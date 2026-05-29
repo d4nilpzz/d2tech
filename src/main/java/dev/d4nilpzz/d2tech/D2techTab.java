@@ -31,12 +31,18 @@ public class D2techTab {
                         output.accept(_Blocks.DECODE_COMPUTER.get());
                         output.accept(_Blocks.SOLAR_GENERATOR.get());
                         output.accept(_Blocks.CABLE.get());
+                        output.accept(_Blocks.DATA_CABLE.get());
                         output.accept(_Items.CONFIGURATOR.get());
                         output.accept(_Items.PLASTIC_PELLET.get());
                         output.accept(_Items.PLASTIC_SHEET.get());
                         output.accept(_Items.CHIP.get());
                         output.accept(_Items.ADVANCED_SPACE_SHIP.get());
                         output.accept(_Items.BATTERY.get());
+                        output.accept(_Items.RECIPE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_ENGINE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_BODY_RECIPE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get());
+                        output.accept(_Items.SATELLITE_SOLAR_PANEL_RECIPE_MEMORY.get());
                     })).build());
 
     public static final Supplier<CreativeModeTab> REBUILD_TECH_INTERCEPTOR_CREATIVE_MODE_TAB =

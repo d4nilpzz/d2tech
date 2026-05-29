@@ -30,6 +30,7 @@ public class ClientEvents {
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ItemBlockRenderTypes.setRenderLayer(_Blocks.CABLE.get(), RenderType.cutout());
+            ItemBlockRenderTypes.setRenderLayer(_Blocks.DATA_CABLE.get(), RenderType.cutout());
         });
     }
 }

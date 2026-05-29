@@ -58,24 +58,24 @@ public class InterceptorAntennaController {
                 pos.offset(-1, 0, 0),
         };
 
-        for (BlockPos checkPos : level3) {
+        for (BlockPos checkPos : level1) {
             if (!level.getBlockState(checkPos).is(_Blocks.ANTENNA_BLOCK.get())) {
-                return 3;
+                return 0;
             }
         }
 
         for (BlockPos checkPos : level2) {
             if (!level.getBlockState(checkPos).is(_Blocks.ANTENNA_BLOCK.get())) {
-                return 2;
-            }
-        }
-
-        for (BlockPos checkPos : level1) {
-            if (!level.getBlockState(checkPos).is(_Blocks.ANTENNA_BLOCK.get())) {
                 return 1;
             }
         }
 
-        return 0;
+        for (BlockPos checkPos : level3) {
+            if (!level.getBlockState(checkPos).is(_Blocks.ANTENNA_BLOCK.get())) {
+                return 2;
+            }
+        }
+
+        return 3;
     }
 }

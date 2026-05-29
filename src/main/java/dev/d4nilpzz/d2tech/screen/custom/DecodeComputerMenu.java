@@ -35,6 +35,17 @@ public class DecodeComputerMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 1, 80, 52));
     }
 
+    @Override
+    public boolean clickMenuButton(Player player, int id) {
+        if (id == 0) {
+            return blockEntity.tryCreateRecipe();
+        } else if (id >= 100) {
+            blockEntity.setFrequency(id - 100);
+            return true;
+        }
+        return false;
+    }
+
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
     private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
@@ -43,7 +54,7 @@ public class DecodeComputerMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;
     @Override
     public @NotNull ItemStack quickMoveStack(@NotNull Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);

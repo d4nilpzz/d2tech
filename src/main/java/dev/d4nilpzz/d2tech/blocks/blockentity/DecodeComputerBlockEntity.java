@@ -1,7 +1,9 @@
 package dev.d4nilpzz.d2tech.blocks.blockentity;
 
+import dev.d4nilpzz.d2tech.blocks.custom.DecodeComputerBlock;
 import dev.d4nilpzz.d2tech.energy.ModEnergyStorage;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
+import dev.d4nilpzz.d2tech.registry._Items;
 import dev.d4nilpzz.d2tech.screen.custom.DecodeComputerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,6 +19,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -33,7 +36,7 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
     public final ItemStackHandler inventory = new ItemStackHandler(3) {
         @Override
         protected int getStackLimit(int slot, @NotNull ItemStack stack) {
-            return 3;
+            return 1;
         }
 
         @Override
@@ -45,6 +48,10 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
             }
         }
     };
+
+    private int receivedFrequency = -1;
+    private int recipeIndex = -1;
+    private int antennaLevel = 0;
 
     private final ModEnergyStorage ENERGY_STORAGE = createEnergyStorage();
     private ModEnergyStorage createEnergyStorage() {
@@ -60,6 +67,93 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
 
     public DecodeComputerBlockEntity(BlockPos pos, BlockState blockState) {
         super(_BlockEntities.DECODE_COMPUTER_BE.get(), pos, blockState);
+    }
+
+    public void setFrequency(int frequency) {
+        System.out.println("[DC] setFrequency=" + frequency + " antLv=" + antennaLevel + " at " + getBlockPos());
+        this.receivedFrequency = frequency;
+        this.recipeIndex = Math.abs(frequency) % 4;
+        setChanged();
+        if (level != null && !level.isClientSide()) {
+            boolean active = isFrequencyInRange();
+            System.out.println("[DC] ACTIVE=" + active + " (lv=" + antennaLevel + " freq=" + frequency + ")");
+            level.setBlock(getBlockPos(), getBlockState().setValue(DecodeComputerBlock.ACTIVE, active), 3);
+            level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
+    }
+
+    public void receiveFrequency(int frequency) {
+        setFrequency(frequency);
+    }
+
+    public void receiveAntennaLevel(int level) {
+        System.out.println("[DC] receiveAntennaLevel=" + level + " (was " + this.antennaLevel + ") freq=" + receivedFrequency + " at " + getBlockPos());
+        this.antennaLevel = level;
+        if (receivedFrequency >= 1) {
+            this.recipeIndex = Math.abs(receivedFrequency) % 4;
+        }
+        setChanged();
+        if (this.level != null && !this.level.isClientSide()) {
+            boolean active = isFrequencyInRange();
+            System.out.println("[DC] ACTIVE=" + active + " (lv=" + antennaLevel + " freq=" + receivedFrequency + ")");
+            this.level.setBlock(getBlockPos(), getBlockState().setValue(DecodeComputerBlock.ACTIVE, active), 3);
+            this.level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
+    }
+
+    public boolean isFrequencyInRange() {
+        if (antennaLevel <= 0 || receivedFrequency < 1) return false;
+        return switch (antennaLevel) {
+            case 1 -> receivedFrequency >= 5 && receivedFrequency <= 10;
+            case 2 -> receivedFrequency >= 3 && receivedFrequency <= 5;
+            case 3 -> receivedFrequency >= 1 && receivedFrequency <= 3;
+            default -> false;
+        };
+    }
+
+    public boolean hasRecipe() {
+        return recipeIndex >= 0 && isFrequencyInRange();
+    }
+
+    public int getRecipeIndex() {
+        return recipeIndex;
+    }
+
+    public int getReceivedFrequency() {
+        return receivedFrequency;
+    }
+
+    public int getAntennaLevel() {
+        return antennaLevel;
+    }
+
+    public boolean tryCreateRecipe() {
+        if (!hasRecipe()) return false;
+        if (level == null || level.isClientSide()) return false;
+
+        ItemStack input = inventory.getStackInSlot(0);
+        if (!input.is(_Items.RECIPE_MEMORY.get())) return false;
+
+        if (!inventory.getStackInSlot(1).isEmpty()) return false;
+
+        Item resultItem = switch (recipeIndex) {
+            case 0 -> _Items.SATELLITE_ENGINE_MEMORY.get();
+            case 1 -> _Items.SATELLITE_BODY_RECIPE_MEMORY.get();
+            case 2 -> _Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get();
+            case 3 -> _Items.SATELLITE_SOLAR_PANEL_RECIPE_MEMORY.get();
+            default -> null;
+        };
+
+        if (resultItem == null) return false;
+
+        input.shrink(1);
+        inventory.setStackInSlot(1, new ItemStack(resultItem));
+
+        recipeIndex = -1;
+        level.setBlock(getBlockPos(), getBlockState().setValue(DecodeComputerBlock.ACTIVE, false), 3);
+        setChanged();
+
+        return true;
     }
 
     public void clearContents() {
@@ -81,6 +175,9 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
         super.saveAdditional(tag, registries);
         tag.put("inventory", inventory.serializeNBT(registries));
         tag.putInt("decode_computer.energy", ENERGY_STORAGE.getEnergyStored());
+        tag.putInt("decode_computer.frequency", receivedFrequency);
+        tag.putInt("decode_computer.recipe_index", recipeIndex);
+        tag.putInt("decode_computer.antenna_level", antennaLevel);
     }
 
     @Override
@@ -88,6 +185,16 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
         super.loadAdditional(tag, registries);
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
         ENERGY_STORAGE.setEnergy(tag.getInt("decode_computer.energy"));
+        receivedFrequency = tag.getInt("decode_computer.frequency");
+        recipeIndex = tag.getInt("decode_computer.recipe_index");
+        antennaLevel = tag.getInt("decode_computer.antenna_level");
+
+        if (level != null && !level.isClientSide()) {
+            boolean shouldBeActive = recipeIndex >= 0 && isFrequencyInRange();
+            if (getBlockState().getValue(DecodeComputerBlock.ACTIVE) != shouldBeActive) {
+                level.setBlock(getBlockPos(), getBlockState().setValue(DecodeComputerBlock.ACTIVE, shouldBeActive), 3);
+            }
+        }
     }
 
     @Nullable
@@ -103,7 +210,7 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
 
     @Override
     public @NotNull Component getDisplayName() {
-        return Component.translatable("block.d2tech.hydraulic_press");
+        return Component.translatable("block.d2tech.decode_computer");
     }
 
     @Nullable
@@ -121,6 +228,5 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState state) {
-        // consume energy
     }
 }

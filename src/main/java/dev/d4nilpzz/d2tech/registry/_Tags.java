@@ -12,6 +12,7 @@ import static dev.d4nilpzz.d2tech.D2tech.MODID;
 public class _Tags {
     public static class Blocks {
         public static final TagKey<Block> CONNECTABLE_CABLE = createTag("connectable_cable");
+        public static final TagKey<Block> CONNECTABLE_DATA_CABLE = createTag("connectable_data_cable");
         public static final TagKey<Block> CONFIGURABLE = createTag("configurable_pipe");
         public static final TagKey<Block> CHARGEABLE = createTag("chargeable");
 

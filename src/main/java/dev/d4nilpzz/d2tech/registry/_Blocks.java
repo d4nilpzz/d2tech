@@ -68,8 +68,8 @@ public class _Blocks {
             () -> new Block(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
-    public static final DeferredBlock<Block> ANTENNA_CONTROLLER = registerBlock("antenna_controller",
-            () -> new Block(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<AntennaControllerBlock> ANTENNA_CONTROLLER = registerBlock("antenna_controller",
+            () -> new AntennaControllerBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
 
@@ -82,6 +82,18 @@ public class _Blocks {
                             .requiresCorrectToolForDrops()
                             .sound(SoundType.METAL),
                             _Tags.Blocks.CONNECTABLE_CABLE
+            )
+    );
+
+    // Data Cable
+    public static final DeferredBlock<DataCableBlock> DATA_CABLE = registerBlock(
+            "data_cable",
+            () -> new DataCableBlock(
+                    BlockBehaviour.Properties.of()
+                            .strength(4f)
+                            .requiresCorrectToolForDrops()
+                            .sound(SoundType.METAL),
+                    _Tags.Blocks.CONNECTABLE_DATA_CABLE
             )
     );
 

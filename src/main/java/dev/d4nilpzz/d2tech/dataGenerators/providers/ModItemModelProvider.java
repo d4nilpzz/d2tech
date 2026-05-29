@@ -29,5 +29,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(_Items.PLASTIC_SHEET.get());
 
         basicItem(_Items.CONFIGURATOR.get());
+
+        // Recipe memory items use manual models in src/main/resources
     }
 }

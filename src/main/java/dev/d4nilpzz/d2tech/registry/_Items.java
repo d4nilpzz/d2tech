@@ -46,6 +46,22 @@ public class _Items {
     public static final DeferredItem<Configurator> CONFIGURATOR = ITEMS.register("configurator",
             () -> new Configurator(new Item.Properties().rarity(Rarity.RARE), "tooltip.d2tech.configurator"));
 
+    // Recipe Memory Items
+    public static final DeferredItem<Item> RECIPE_MEMORY = ITEMS.register("recipe_memory",
+            () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> SATELLITE_ENGINE_MEMORY = ITEMS.register("satellite_engine_memory",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final DeferredItem<Item> SATELLITE_BODY_RECIPE_MEMORY = ITEMS.register("satellite_body_recipe_memory",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final DeferredItem<Item> SATELLITE_ADVANCED_SPACE_CHIP_MEMORY = ITEMS.register("satellite_advanced_space_chip_memory",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static final DeferredItem<Item> SATELLITE_SOLAR_PANEL_RECIPE_MEMORY = ITEMS.register("satellite_solar_panel_recipe_memory",
+            () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

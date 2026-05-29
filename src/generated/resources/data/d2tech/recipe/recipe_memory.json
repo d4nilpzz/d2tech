@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "d2tech:chip"
+    },
+    "P": {
+      "item": "d2tech:plastic_sheet"
+    }
+  },
+  "pattern": [
+    " C ",
+    "CPC",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:recipe_memory"
+  }
+}

@@ -164,6 +164,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('R', Items.REDSTONE)
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.DATA_CABLE.get(), 4)
+                .pattern("SRS")
+                .define('S', _Items.STEEL.get())
+                .define('R', Items.REDSTONE)
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.RECIPE_MEMORY.get())
+                .pattern(" C ")
+                .pattern("CPC")
+                .pattern(" C ")
+                .define('C', _Items.CHIP.get())
+                .define('P', _Items.PLASTIC_SHEET.get())
+                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+
         // Hydraulic Press recipes
         HydraulicPressRecipeBuilder.press(
                         Ingredient.of(_Items.PLASTIC_PELLET.get()),

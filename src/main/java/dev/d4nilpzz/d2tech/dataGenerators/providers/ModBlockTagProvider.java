@@ -36,6 +36,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(_Blocks.HYDRAULIC_PRESS.get())
 
                 .add(_Blocks.CABLE.get())
+                .add(_Blocks.DATA_CABLE.get())
 
                 .add(_Blocks.DECODE_COMPUTER.get())
                 .add(_Blocks.ANTENNA_BLOCK.get())
@@ -56,6 +57,7 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(_Blocks.COAL_GENERATOR.get())
 
                 .add(_Blocks.CABLE.get())
+                .add(_Blocks.DATA_CABLE.get())
 
                 .add(_Blocks.DECODE_COMPUTER.get())
                 .add(_Blocks.ANTENNA_BLOCK.get())
@@ -68,7 +70,13 @@ public class ModBlockTagProvider extends BlockTagsProvider {
                 .add(_Blocks.HEAT_GENERATOR.get())
                 .add(_Blocks.COAL_GENERATOR.get());
 
+        tag(_Tags.Blocks.CONNECTABLE_DATA_CABLE)
+                .add(_Blocks.DATA_CABLE.get())
+                .add(_Blocks.DECODE_COMPUTER.get())
+                .add(_Blocks.ANTENNA_CONTROLLER.get());
+
         tag(_Tags.Blocks.CONFIGURABLE)
-                .add(_Blocks.CABLE.get());
+                .add(_Blocks.CABLE.get())
+                .add(_Blocks.DATA_CABLE.get());
     }
 }

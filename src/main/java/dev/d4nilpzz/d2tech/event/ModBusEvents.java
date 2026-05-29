@@ -1,6 +1,7 @@
 package dev.d4nilpzz.d2tech.event;
 
 import dev.d4nilpzz.d2tech.D2tech;
+import dev.d4nilpzz.d2tech.blocks.blockentity.AntennaControllerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.CoalGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.DecodeComputerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.HydraulicPressBlockEntity;

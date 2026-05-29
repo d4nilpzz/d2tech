@@ -34,6 +34,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(_Blocks.HYDRAULIC_PRESS.get());
         dropSelf(_Blocks.COAL_GENERATOR.get());
         dropSelf(_Blocks.CABLE.get());
+        dropSelf(_Blocks.DATA_CABLE.get());
 
         // Learning Recipe System
         dropSelf(_Blocks.DECODE_COMPUTER.get());

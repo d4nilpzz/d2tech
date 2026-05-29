@@ -25,6 +25,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(_Blocks.STRUCTURE_BLOCK);
         blockWithItem(_Blocks.ANTENNA_BLOCK);
         blockWithItem(_Blocks.ANTENNA_CONTROLLER);
+
+        // Data Cable (manual models, but skip generated one)
     }
 
     private void blockWithItem(DeferredBlock<?> deferredBlock) {
