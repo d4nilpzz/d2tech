@@ -7,14 +7,12 @@
     },
     "C": {
       "item": "minecraft:copper_ingot"
-    },
-    "R": {
-      "item": "minecraft:redstone"
     }
   },
   "pattern": [
-    "RCR",
-    " A "
+    " C ",
+    "CAC",
+    " C "
   ],
   "result": {
     "count": 1,

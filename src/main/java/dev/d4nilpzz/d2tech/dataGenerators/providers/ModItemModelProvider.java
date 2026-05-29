@@ -22,7 +22,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(_Items.RAW_ALUMINUM.get());
 
         basicItem(_Items.CHIP.get());
-        basicItem(_Items.ADVANCED_CHIP.get());
+        basicItem(_Items.ADVANCED_SPACE_SHIP.get());
         basicItem(_Items.BATTERY.get());
 
         basicItem(_Items.PLASTIC_PELLET.get());

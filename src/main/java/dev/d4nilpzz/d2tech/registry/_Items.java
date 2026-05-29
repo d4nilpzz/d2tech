@@ -28,7 +28,7 @@ public class _Items {
     public static final DeferredItem<Item> CHIP = ITEMS.register("chip",
             () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> ADVANCED_CHIP = ITEMS.register("advanced_chip",
+    public static final DeferredItem<Item> ADVANCED_SPACE_SHIP = ITEMS.register("advanced_space_ship",
             () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> BATTERY = ITEMS.register("battery",

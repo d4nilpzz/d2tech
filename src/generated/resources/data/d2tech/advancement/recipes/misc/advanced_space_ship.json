@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "d2tech:advanced_chip"
+        "recipe": "d2tech:advanced_space_ship"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "d2tech:advanced_chip"
+      "d2tech:advanced_space_ship"
     ]
   }
 }

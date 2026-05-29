@@ -47,28 +47,27 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         // Structure Block
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.STRUCTURE_BLOCK.get())
                 .pattern("BAB")
-                .pattern("ABA")
+                .pattern("A A")
                 .pattern("BAB")
                 .define('A', _Items.STEEL.get())
-                .define('B', Items.IRON_INGOT)
+                .define('B', _Items.ALUMINUM.get())
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
         // Chip
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.CHIP.get())
-                .pattern("RCR")
-                .pattern(" A ")
+                .pattern(" C ")
+                .pattern("CAC")
+                .pattern(" C ")
                 .define('A', _Items.PLASTIC_SHEET.get())
-                .define('R', Items.REDSTONE)
                 .define('C', Items.COPPER_INGOT)
                 .unlockedBy("has_plastic_sheet", has(_Items.PLASTIC_SHEET)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.ADVANCED_CHIP.get())
-                .pattern(" D ")
-                .pattern("RCR")
-                .pattern(" D ")
-                .define('R', Items.REDSTONE)
-                .define('D', Items.DIAMOND)
-                .define('C', _Items.CHIP.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.ADVANCED_SPACE_SHIP.get())
+                .pattern(" B ")
+                .pattern("BAB")
+                .pattern(" B ")
+                .define('B', Items.GOLD_INGOT)
+                .define('A', _Items.PLASTIC_SHEET.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 
         // Battery
@@ -84,23 +83,25 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         // Machines
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.SOLAR_GENERATOR.get())
                 .pattern("PPP")
-                .pattern("CBC")
+                .pattern("CBG")
                 .pattern("SSS")
                 .define('P', Items.GLASS_PANE)
                 .define('C', _Items.CHIP.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('S', _Items.STEEL.get())
+                .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.COAL_GENERATOR.get())
                 .pattern("SFS")
-                .pattern("CBC")
-                .pattern("SIS")
+                .pattern("CBG")
+                .pattern("SFS")
                 .define('S', _Items.STEEL.get())
                 .define('F', Items.FURNACE)
                 .define('C', _Items.CHIP.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('I', Items.IRON_INGOT)
+                .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HEAT_GENERATOR.get())
@@ -138,15 +139,24 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', _Items.CHIP.get())
                 .unlockedBy("has_antenna_block", has(_Blocks.ANTENNA_BLOCK)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.CONFIGURATOR.get())
+                .pattern("C")
+                .pattern("B")
+                .pattern("A")
+                .define('A', _Items.ALUMINUM.get())
+                .define('B', _Items.BATTERY.get())
+                .define('C', _Items.STEEL.get())
+                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HYDRAULIC_PRESS.get())
-                .pattern("CRC")
-                .pattern("CBC")
-                .pattern("SAS")
+                .pattern("CAC")
+                .pattern("CBG")
+                .pattern("SGS")
                 .define('A', Items.ANVIL)
-                .define('R', Items.REDSTONE)
-                .define('C', Items.IRON_INGOT)
+                .define('C', _Items.ALUMINUM.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('S', _Items.STEEL.get())
+                .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.CABLE.get(), 4)

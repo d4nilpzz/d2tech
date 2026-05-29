@@ -35,6 +35,7 @@ public class D2techTab {
                         output.accept(_Items.PLASTIC_PELLET.get());
                         output.accept(_Items.PLASTIC_SHEET.get());
                         output.accept(_Items.CHIP.get());
+                        output.accept(_Items.ADVANCED_SPACE_SHIP.get());
                         output.accept(_Items.BATTERY.get());
                     })).build());
 

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "d2tech:item/advanced_chip"
+    "layer0": "d2tech:item/advanced_space_ship"
   }
 }
