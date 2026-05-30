@@ -7,12 +7,15 @@
     },
     "P": {
       "item": "d2tech:plastic_sheet"
+    },
+    "S": {
+      "item": "d2tech:steel"
     }
   },
   "pattern": [
-    " C ",
+    " S ",
     "CPC",
-    " C "
+    " S "
   ],
   "result": {
     "count": 1,

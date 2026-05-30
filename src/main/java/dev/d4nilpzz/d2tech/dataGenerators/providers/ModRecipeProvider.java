@@ -99,12 +99,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.COAL_GENERATOR.get())
-                .pattern("SFS")
-                .pattern("CBG")
-                .pattern("SFS")
+                .pattern("AFA")
+                .pattern("ABG")
+                .pattern("SSS")
                 .define('S', _Items.STEEL.get())
                 .define('F', Items.FURNACE)
-                .define('C', _Items.CHIP.get())
+                .define('A', _Items.CHIP.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
@@ -168,7 +168,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HYDRAULIC_PRESS.get())
                 .pattern("CAC")
                 .pattern("CBG")
-                .pattern("SGS")
+                .pattern("SSS")
                 .define('A', Items.ANVIL)
                 .define('C', _Items.ALUMINUM.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
@@ -183,17 +183,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.DATA_CABLE.get(), 4)
+                .pattern(" S ")
                 .pattern("SRS")
-                .define('S', _Items.STEEL.get())
-                .define('R', Items.REDSTONE)
-                .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
+                .pattern(" S ")
+                .define('S', _Blocks.CABLE.get())
+                .define('R', Items.COPPER_INGOT)
+                .unlockedBy("has_cable", has(_Items.STEEL)).save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.RECIPE_MEMORY.get())
-                .pattern(" C ")
+                .pattern(" S ")
                 .pattern("CPC")
-                .pattern(" C ")
+                .pattern(" S ")
                 .define('C', _Items.CHIP.get())
                 .define('P', _Items.PLASTIC_SHEET.get())
+                .define('S', _Items.STEEL.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
 
         // Hydraulic Press recipes

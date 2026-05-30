@@ -3,14 +3,14 @@
   "category": "misc",
   "key": {
     "R": {
-      "item": "minecraft:redstone"
+      "item": "minecraft:copper_ingot"
     },
     "S": {
-      "item": "d2tech:steel"
+      "item": "d2tech:cable"
     }
   },
   "pattern": [
-    "SRS"
+    "RSR"
   ],
   "result": {
     "count": 4,
