@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "up": "d2tech:block/advanced_crafting_table/top",
+    "down": "d2tech:block/advanced_crafting_table/bottom",
+    "north": "d2tech:block/advanced_crafting_table/side",
+    "south": "d2tech:block/advanced_crafting_table/side",
+    "east": "d2tech:block/advanced_crafting_table/side",
+    "west": "d2tech:block/advanced_crafting_table/side",
+    "particle": "d2tech:block/advanced_crafting_table/top"
+  }
+}

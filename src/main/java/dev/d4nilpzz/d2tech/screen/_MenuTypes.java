@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.screen;
 
+import dev.d4nilpzz.d2tech.screen.custom.AdvancedCraftingTableMenu;
 import dev.d4nilpzz.d2tech.screen.custom.CoalGeneratorMenu;
 import dev.d4nilpzz.d2tech.screen.custom.DecodeComputerMenu;
 import dev.d4nilpzz.d2tech.screen.custom.HydraulicPressMenu;
@@ -30,6 +31,9 @@ public class _MenuTypes {
 
     public static final DeferredHolder<MenuType<?>, MenuType<DecodeComputerMenu>> DECODE_COMPUTER_MENU =
             registerMenuType("decode_computer_menu", DecodeComputerMenu::new);
+
+    public static final DeferredHolder<MenuType<?>, MenuType<AdvancedCraftingTableMenu>> ADVANCED_CRAFTING_TABLE_MENU =
+            registerMenuType("advanced_crafting_table_menu", AdvancedCraftingTableMenu::new);
 
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
                                                                                                                IContainerFactory<T> factory) {

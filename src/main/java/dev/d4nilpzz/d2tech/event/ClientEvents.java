@@ -3,6 +3,7 @@ package dev.d4nilpzz.d2tech.event;
 import dev.d4nilpzz.d2tech.D2tech;
 import dev.d4nilpzz.d2tech.registry._Blocks;
 import dev.d4nilpzz.d2tech.screen._MenuTypes;
+import dev.d4nilpzz.d2tech.screen.custom.screen.AdvancedCraftingTableScreen;
 import dev.d4nilpzz.d2tech.screen.custom.screen.CoalGeneratorScreen;
 import dev.d4nilpzz.d2tech.screen.custom.screen.DecodeComputerScreen;
 import dev.d4nilpzz.d2tech.screen.custom.screen.HydraulicPressScreen;
@@ -23,6 +24,7 @@ public class ClientEvents {
         event.register(_MenuTypes.COAL_GENERATOR_MENU.get(), CoalGeneratorScreen::new);
         event.register(_MenuTypes.HYDRAULIC_PRESS_MENU.get(), HydraulicPressScreen::new);
         event.register(_MenuTypes.DECODE_COMPUTER_MENU.get(), DecodeComputerScreen::new);
+        event.register(_MenuTypes.ADVANCED_CRAFTING_TABLE_MENU.get(), AdvancedCraftingTableScreen::new);
     }
 
     @SuppressWarnings({"deprecation", "CodeBlock2Expr"})

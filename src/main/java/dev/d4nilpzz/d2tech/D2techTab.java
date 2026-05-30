@@ -32,6 +32,7 @@ public class D2techTab {
                         output.accept(_Blocks.SOLAR_GENERATOR.get());
                         output.accept(_Blocks.CABLE.get());
                         output.accept(_Blocks.DATA_CABLE.get());
+                        output.accept(_Blocks.ADVANCED_CRAFTING_TABLE.get());
                         output.accept(_Items.CONFIGURATOR.get());
                         output.accept(_Items.PLASTIC_PELLET.get());
                         output.accept(_Items.PLASTIC_SHEET.get());

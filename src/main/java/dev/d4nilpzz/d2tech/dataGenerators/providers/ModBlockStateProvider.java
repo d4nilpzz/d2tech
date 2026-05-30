@@ -26,6 +26,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(_Blocks.ANTENNA_BLOCK);
         blockWithItem(_Blocks.ANTENNA_CONTROLLER);
 
+        blockWithItem(_Blocks.ADVANCED_CRAFTING_TABLE);
+
         // Data Cable (manual models, but skip generated one)
     }
 

@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.dataGenerators.providers;
 
+import dev.d4nilpzz.d2tech.registry._Blocks;
 import dev.d4nilpzz.d2tech.registry._Items;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -29,6 +30,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(_Items.PLASTIC_SHEET.get());
 
         basicItem(_Items.CONFIGURATOR.get());
+
+        // Advanced Crafting Table block item
+        withExistingParent(_Blocks.ADVANCED_CRAFTING_TABLE.getId().getPath(), modLoc("block/advanced_crafting_table"));
 
         // Recipe memory items use manual models in src/main/resources
     }

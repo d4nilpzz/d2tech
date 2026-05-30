@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "d2tech:block/advanced_crafting_table", "y": 0 },
+    "facing=east":  { "model": "d2tech:block/advanced_crafting_table", "y": 90 },
+    "facing=south": { "model": "d2tech:block/advanced_crafting_table", "y": 180 },
+    "facing=west":  { "model": "d2tech:block/advanced_crafting_table", "y": 270 }
+  }
+}

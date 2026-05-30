@@ -147,6 +147,18 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', _Items.STEEL.get())
                 .unlockedBy("has_steel", has(_Items.STEEL)).save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.ADVANCED_CRAFTING_TABLE.get())
+                .pattern("ABA")
+                .pattern("CDC")
+                .pattern("SGS")
+                .define('A', _Items.ALUMINUM.get())
+                .define('B', _Items.CHIP.get())
+                .define('C', Items.REDSTONE)
+                .define('D', _Blocks.DECODE_COMPUTER.get())
+                .define('S', _Items.STEEL.get())
+                .define('G', _Items.BATTERY.get())
+                .unlockedBy("has_decode_computer", has(_Blocks.DECODE_COMPUTER)).save(recipeOutput);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Blocks.HYDRAULIC_PRESS.get())
                 .pattern("CAC")
                 .pattern("CBG")

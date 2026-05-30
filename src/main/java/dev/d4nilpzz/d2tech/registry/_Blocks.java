@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.registry;
 
+import dev.d4nilpzz.d2tech.blocks.custom.AdvancedCraftingTableBlock;
 import dev.d4nilpzz.d2tech.blocks.custom.*;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -72,6 +73,11 @@ public class _Blocks {
             () -> new AntennaControllerBlock(BlockBehaviour.Properties.of()
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
+
+    // Advanced Crafting Table
+    public static final DeferredBlock<AdvancedCraftingTableBlock> ADVANCED_CRAFTING_TABLE = registerBlock("advanced_crafting_table",
+            () -> new AdvancedCraftingTableBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
     // Cable
     public static final DeferredBlock<CableBlock> CABLE = registerBlock(

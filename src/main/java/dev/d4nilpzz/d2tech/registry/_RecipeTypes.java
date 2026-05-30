@@ -1,5 +1,7 @@
 package dev.d4nilpzz.d2tech.registry;
 
+import dev.d4nilpzz.d2tech.recipe.AdvancedCraftingRecipe;
+import dev.d4nilpzz.d2tech.recipe.AdvancedCraftingRecipeSerializer;
 import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipe;
 import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipeSerializer;
 import net.minecraft.core.registries.Registries;
@@ -24,6 +26,12 @@ public class _RecipeTypes {
 
     public static final DeferredHolder<RecipeSerializer<?>, HydraulicPressRecipeSerializer> HYDRAULIC_PRESS_SERIALIZER =
             RECIPE_SERIALIZERS.register("hydraulic_press", HydraulicPressRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<AdvancedCraftingRecipe>> ADVANCED_CRAFTING_TYPE =
+            RECIPE_TYPES.register("advanced_crafting", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(MODID, "advanced_crafting")));
+
+    public static final DeferredHolder<RecipeSerializer<?>, AdvancedCraftingRecipeSerializer> ADVANCED_CRAFTING_SERIALIZER =
+            RECIPE_SERIALIZERS.register("advanced_crafting", AdvancedCraftingRecipeSerializer::new);
 
     public static void register(IEventBus eventBus) {
         RECIPE_TYPES.register(eventBus);
