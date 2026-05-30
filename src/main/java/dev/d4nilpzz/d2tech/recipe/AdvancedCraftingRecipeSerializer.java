@@ -50,7 +50,6 @@ public class AdvancedCraftingRecipeSerializer implements RecipeSerializer<Advanc
                     buf -> {
                         ItemStack memory = ItemStack.STREAM_CODEC.decode(buf);
                         int patternSize = buf.readVarInt();
-                        List<String> pattern = buf.readUtf().lines().toList(); // workaround
                         String[] patternArr = new String[patternSize];
                         for (int i = 0; i < patternSize; i++) {
                             patternArr[i] = buf.readUtf();

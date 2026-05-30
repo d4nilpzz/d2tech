@@ -82,9 +82,6 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
         };
     }
 
-    private int progress;
-    private int maxProgress;
-
     public AdvancedCraftingTableBlockEntity(BlockPos pos, BlockState blockState) {
         super(_BlockEntities.ADVANCED_CRAFTING_TABLE_BE.get(), pos, blockState);
     }
@@ -103,8 +100,6 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
         super.saveAdditional(tag, registries);
         tag.put("inventory", inventory.serializeNBT(registries));
         tag.putInt("advanced_crafting_table.energy", ENERGY_STORAGE.getEnergyStored());
-        tag.putInt("advanced_crafting_table.progress", progress);
-        tag.putInt("advanced_crafting_table.max_progress", maxProgress);
     }
 
     @Override
@@ -112,8 +107,6 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
         super.loadAdditional(tag, registries);
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
         ENERGY_STORAGE.setEnergy(tag.getInt("advanced_crafting_table.energy"));
-        progress = tag.getInt("advanced_crafting_table.progress");
-        maxProgress = tag.getInt("advanced_crafting_table.max_progress");
     }
 
     @Nullable
@@ -146,7 +139,7 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
         return this.inventory;
     }
 
-    private Optional<RecipeHolder<AdvancedCraftingRecipe>> getCurrentRecipe() {
+    public Optional<RecipeHolder<AdvancedCraftingRecipe>> getCurrentRecipe() {
         if (level == null) return Optional.empty();
         ItemStack memory = inventory.getStackInSlot(MEMORY_SLOT);
         if (memory.isEmpty()) return Optional.empty();
@@ -158,6 +151,15 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
 
         return level.getRecipeManager()
                 .getRecipeFor(_RecipeTypes.ADVANCED_CRAFTING_TYPE.get(), new AdvancedCraftingRecipeInput(memory, grid), level);
+    }
+
+    public void consumeGridItems() {
+        for (int i = 0; i < 9; i++) {
+            ItemStack slotStack = inventory.getStackInSlot(CRAFTING_SLOT_START + i);
+            if (!slotStack.isEmpty()) {
+                slotStack.shrink(1);
+            }
+        }
     }
 
     private void chargeBattery() {
@@ -181,50 +183,19 @@ public class AdvancedCraftingTableBlockEntity extends BlockEntity implements Men
     public void tick(Level level, BlockPos blockPos, BlockState state) {
         if (level.isClientSide) return;
 
-        boolean active = progress > 0;
+        chargeBattery();
+
         ItemStack output = inventory.getStackInSlot(OUTPUT_SLOT);
 
         Optional<RecipeHolder<AdvancedCraftingRecipe>> recipeHolder = getCurrentRecipe();
 
-        if (recipeHolder.isPresent()) {
-            AdvancedCraftingRecipe recipe = recipeHolder.get().value();
-            ItemStack result = recipe.getResultItem(null);
-
-            if (maxProgress == 0) {
-                maxProgress = 100;
-            }
-
-            boolean canOutput = output.isEmpty()
-                    || (output.is(result.getItem()) && output.getCount() + result.getCount() <= output.getMaxStackSize());
-
-            int energyPerTick = Math.max(1, ENERGY_COST / maxProgress);
-
-            if (canOutput && ENERGY_STORAGE.getEnergyStored() >= energyPerTick) {
-                ENERGY_STORAGE.internalExtract(energyPerTick, false);
-                progress++;
-
-                if (progress >= maxProgress) {
-                    for (int i = 0; i < 9; i++) {
-                        inventory.getStackInSlot(CRAFTING_SLOT_START + i).shrink(1);
-                    }
-                    if (output.isEmpty()) {
-                        inventory.setStackInSlot(OUTPUT_SLOT, result.copy());
-                    } else {
-                        output.grow(result.getCount());
-                    }
-                    progress = 0;
-                    maxProgress = 0;
-                }
-            }
-        } else {
-            if (progress > 0) progress--;
-            else maxProgress = 0;
+        if (recipeHolder.isPresent() && output.isEmpty() && ENERGY_STORAGE.getEnergyStored() >= ENERGY_COST) {
+            ENERGY_STORAGE.internalExtract(ENERGY_COST, false);
+            inventory.setStackInSlot(OUTPUT_SLOT, recipeHolder.get().value().getResultItem(null).copy());
         }
 
-        chargeBattery();
-
-        if (state.getValue(AdvancedCraftingTableBlock.ACTIVE) != active) {
-            level.setBlock(blockPos, state.setValue(AdvancedCraftingTableBlock.ACTIVE, active), 3);
+        if (state.getValue(AdvancedCraftingTableBlock.ACTIVE)) {
+            level.setBlock(blockPos, state.setValue(AdvancedCraftingTableBlock.ACTIVE, false), 3);
         }
     }
 }

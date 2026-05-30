@@ -28,15 +28,17 @@ public class AdvancedCraftingRecipe implements Recipe<AdvancedCraftingRecipeInpu
 
     @Override
     public boolean matches(@NotNull AdvancedCraftingRecipeInput input, @NotNull Level level) {
-        if (!ItemStack.isSameItem(input.memory(), recipeMemory)) return false;
+        if (input.memory().isEmpty() || !input.memory().is(recipeMemory.getItem())) return false;
         if (input.grid().length != 9) return false;
 
         for (int row = 0; row < 3; row++) {
             for (int col = 0; col < 3; col++) {
                 ItemStack expected = key.getOrDefault(pattern.get(row).charAt(col), ItemStack.EMPTY);
                 ItemStack actual = input.grid()[row * 3 + col];
-                if (!ItemStack.isSameItem(expected, actual)) return false;
-                if (!expected.isEmpty() && actual.getCount() < expected.getCount()) return false;
+                if (expected.isEmpty() && actual.isEmpty()) continue;
+                if (expected.isEmpty() || actual.isEmpty()) return false;
+                if (!expected.is(actual.getItem())) return false;
+                if (actual.getCount() < expected.getCount()) return false;
             }
         }
         return true;

@@ -35,7 +35,7 @@ public class AdvancedCraftingTableScreen extends AbstractContainerScreen<Advance
         ScreenUtils.drawEnergy(
                 guiGraphics,
                 this.leftPos + 155,
-                this.topPos + 22,
+                this.topPos + 25,
                 menu.blockEntity.getEnergyStorage(null).getEnergyStored(),
                 menu.blockEntity.getEnergyStorage(null).getMaxEnergyStored()
         );
@@ -47,7 +47,7 @@ public class AdvancedCraftingTableScreen extends AbstractContainerScreen<Advance
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
 
         if (ScreenUtils.isHovering(
-                ScreenUtils.getEnergyBounds(this.leftPos + 155, this.topPos + 22),
+                ScreenUtils.getEnergyBounds(this.leftPos + 155, this.topPos + 25),
                 pMouseX,
                 pMouseY
         )) {

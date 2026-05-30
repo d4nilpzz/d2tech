@@ -1,0 +1,30 @@
+{
+  "type": "d2tech:advanced_crafting",
+  "key": {
+    "C": {
+      "count": 1,
+      "id": "d2tech:chip"
+    },
+    "G": {
+      "count": 1,
+      "id": "minecraft:gold_ingot"
+    },
+    "S": {
+      "count": 1,
+      "id": "d2tech:plastic_sheet"
+    }
+  },
+  "pattern": [
+    "CGC",
+    "GSG",
+    "CGC"
+  ],
+  "recipe_memory": {
+    "count": 1,
+    "id": "d2tech:satellite_advanced_space_chip_memory"
+  },
+  "result": {
+    "count": 1,
+    "id": "d2tech:advanced_space_ship"
+  }
+}

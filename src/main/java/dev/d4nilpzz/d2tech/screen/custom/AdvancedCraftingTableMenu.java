@@ -46,7 +46,15 @@ public class AdvancedCraftingTableMenu extends AbstractContainerMenu {
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 9, 18, 50));
 
         // Output slot - slot 10 (to the right of the grid)
-        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 10, 106, 32));
+        this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 10, 106, 32) {
+            @Override
+            public void onTake(@NotNull Player player, @NotNull ItemStack stack) {
+                if (AdvancedCraftingTableMenu.this.blockEntity.getCurrentRecipe().isPresent()) {
+                    AdvancedCraftingTableMenu.this.blockEntity.consumeGridItems();
+                }
+                super.onTake(player, stack);
+            }
+        });
 
         // Battery slot - slot 11 (bottom right)
         this.addSlot(new SlotItemHandler(this.blockEntity.inventory, 11, 152, 76));

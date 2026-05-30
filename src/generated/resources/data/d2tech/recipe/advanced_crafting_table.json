@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "d2tech:aluminum"
+    },
+    "B": {
+      "item": "d2tech:chip"
+    },
+    "C": {
+      "item": "minecraft:redstone"
+    },
+    "D": {
+      "item": "d2tech:decode_computer"
+    },
+    "G": {
+      "item": "d2tech:battery"
+    },
+    "S": {
+      "item": "d2tech:steel"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "CDC",
+    "SGS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "d2tech:advanced_crafting_table"
+  }
+}

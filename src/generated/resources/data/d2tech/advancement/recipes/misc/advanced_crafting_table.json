@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_chip": {
+    "has_decode_computer": {
       "conditions": {
         "items": [
           {
-            "items": "d2tech:chip"
+            "items": "d2tech:decode_computer"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "d2tech:advanced_space_ship"
+        "recipe": "d2tech:advanced_crafting_table"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_chip"
+      "has_decode_computer"
     ]
   ],
   "rewards": {
     "recipes": [
-      "d2tech:advanced_space_ship"
+      "d2tech:advanced_crafting_table"
     ]
   }
 }

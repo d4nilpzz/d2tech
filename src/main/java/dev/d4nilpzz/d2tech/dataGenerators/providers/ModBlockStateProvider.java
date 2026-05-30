@@ -26,7 +26,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(_Blocks.ANTENNA_BLOCK);
         blockWithItem(_Blocks.ANTENNA_CONTROLLER);
 
-        blockWithItem(_Blocks.ADVANCED_CRAFTING_TABLE);
+        // Item model only (blockstate uses custom variant with FACING)
+        itemModels().withExistingParent(_Blocks.ADVANCED_CRAFTING_TABLE.getId().getPath(),
+                modLoc("block/advanced_crafting_table"));
 
         // Data Cable (manual models, but skip generated one)
     }

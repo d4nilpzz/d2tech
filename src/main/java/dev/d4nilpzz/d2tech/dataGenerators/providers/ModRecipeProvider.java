@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.dataGenerators.providers;
 
+import dev.d4nilpzz.d2tech.dataGenerators.builders.AdvancedCraftingRecipeBuilder;
 import dev.d4nilpzz.d2tech.dataGenerators.builders.HydraulicPressRecipeBuilder;
 import dev.d4nilpzz.d2tech.registry._Blocks;
 import dev.d4nilpzz.d2tech.registry._Items;
@@ -14,6 +15,7 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 import static dev.d4nilpzz.d2tech.D2tech.MODID;
@@ -62,13 +64,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.COPPER_INGOT)
                 .unlockedBy("has_plastic_sheet", has(_Items.PLASTIC_SHEET)).save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.ADVANCED_SPACE_SHIP.get())
-                .pattern(" B ")
-                .pattern("BAB")
-                .pattern(" B ")
-                .define('B', Items.GOLD_INGOT)
-                .define('A', _Items.PLASTIC_SHEET.get())
-                .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);
+        // Advanced Crafting Table recipes
+        AdvancedCraftingRecipeBuilder.advancedCrafting(
+                        new ItemStack(_Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get()),
+                        List.of("CGC", "GSG", "CGC"),
+                        Map.of('C', new ItemStack(_Items.CHIP.get()),
+                                'G', new ItemStack(Items.GOLD_INGOT),
+                                'S', new ItemStack(_Items.PLASTIC_SHEET.get())),
+                        new ItemStack(_Items.ADVANCED_SPACE_SHIP.get())
+                )
+                .unlockedBy("has_chip", has(_Items.CHIP))
+                .save(recipeOutput);
 
         // Battery
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, _Items.BATTERY.get())
