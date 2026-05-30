@@ -46,8 +46,8 @@
   "tooltip.d2tech.configurator": "Right Click the cables to configure them.",
 
   "item.d2tech.recipe_memory": "Recipe Memory",
-  "item.d2tech.satellite_engine_memory": "Satellite Engine Memory",
-  "item.d2tech.satellite_body_recipe_memory": "Satellite Body Recipe Memory",
-  "item.d2tech.satellite_advanced_space_chip_memory": "Advanced Satellite Space Chip Memory",
-  "item.d2tech.satellite_solar_panel_recipe_memory": "Solar Panel Recipe Memory"
+  "item.d2tech.satellite_engine_memory": "Satellite Engine Recipe",
+  "item.d2tech.satellite_body_recipe_memory": "Satellite Body Recipe",
+  "item.d2tech.satellite_advanced_space_chip_memory": "Advanced Space Chip Recipe",
+  "item.d2tech.satellite_solar_panel_recipe_memory": "Satellite Solar Panel Recipe"
 }

@@ -15,6 +15,7 @@ public class AntennaControllerBlockEntity extends BlockEntity {
 
     private int tickCounter = 0;
     private int nextSignalTick = 0;
+    private int lastAntennaLevel = 0;
 
     public AntennaControllerBlockEntity(BlockPos pos, BlockState blockState) {
         super(_BlockEntities.ANTENNA_CONTROLLER_BE.get(), pos, blockState);
@@ -28,19 +29,22 @@ public class AntennaControllerBlockEntity extends BlockEntity {
         if (antennaLevel == 0) {
             tickCounter = 0;
             nextSignalTick = 0;
+            lastAntennaLevel = 0;
             return;
+        }
+
+        if (antennaLevel != lastAntennaLevel) {
+            System.out.println("[AC] Level changed: " + lastAntennaLevel + " -> " + antennaLevel + " at " + pos);
+            lastAntennaLevel = antennaLevel;
+            tickCounter = nextSignalTick - 20;
         }
 
         if (nextSignalTick == 0) {
             nextSignalTick = 600 + level.random.nextInt(300);
-            System.out.println("[AC] Init timer=" + nextSignalTick + "s lv=" + antennaLevel + " at " + pos);
+            System.out.println("[AC] Init timer=" + nextSignalTick + " lv=" + antennaLevel + " at " + pos);
         }
 
         tickCounter++;
-
-        if (tickCounter >= nextSignalTick || tickCounter % 10 == 0) {
-            System.out.println("[AC] tick=" + tickCounter + "/" + nextSignalTick + " lv=" + antennaLevel + " at " + pos);
-        }
 
         if (tickCounter >= nextSignalTick) {
             tickCounter = 0;

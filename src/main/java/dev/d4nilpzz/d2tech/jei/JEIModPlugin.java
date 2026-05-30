@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.jei;
 
+import dev.d4nilpzz.d2tech.recipe.AdvancedCraftingRecipe;
 import dev.d4nilpzz.d2tech.recipe.HydraulicPressRecipe;
 import dev.d4nilpzz.d2tech.registry._RecipeTypes;
 import mezz.jei.api.IModPlugin;
@@ -27,7 +28,11 @@ public class JEIModPlugin implements IModPlugin {
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
-        registration.addRecipeCategories(new HydraulicPressRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        var guiHelper = registration.getJeiHelpers().getGuiHelper();
+        registration.addRecipeCategories(
+                new HydraulicPressRecipeCategory(guiHelper),
+                new AdvancedCraftingTableRecipeCategory(guiHelper)
+        );
     }
 
     @Override
@@ -35,12 +40,20 @@ public class JEIModPlugin implements IModPlugin {
         var minecraft = Minecraft.getInstance();
         if (minecraft.level == null) return;
 
-        List<HydraulicPressRecipe> recipes = minecraft.level.getRecipeManager()
+        List<HydraulicPressRecipe> hydraulicRecipes = minecraft.level.getRecipeManager()
                 .getAllRecipesFor(_RecipeTypes.HYDRAULIC_PRESS_TYPE.get())
                 .stream()
                 .map(RecipeHolder::value)
                 .toList();
 
-        registration.addRecipes(HydraulicPressRecipeCategory.RECIPE_TYPE, recipes);
+        registration.addRecipes(HydraulicPressRecipeCategory.RECIPE_TYPE, hydraulicRecipes);
+
+        List<AdvancedCraftingRecipe> advancedRecipes = minecraft.level.getRecipeManager()
+                .getAllRecipesFor(_RecipeTypes.ADVANCED_CRAFTING_TYPE.get())
+                .stream()
+                .map(RecipeHolder::value)
+                .toList();
+
+        registration.addRecipes(AdvancedCraftingTableRecipeCategory.RECIPE_TYPE, advancedRecipes);
     }
 }
