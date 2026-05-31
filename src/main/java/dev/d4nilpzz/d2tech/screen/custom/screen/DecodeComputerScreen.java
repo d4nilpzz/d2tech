@@ -18,6 +18,8 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
             ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/decode_computer_menu.png");
     private static final ResourceLocation SLIDE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/slide.png");
+    private static final ResourceLocation GRAPH_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/graph.png");
 
     private static final int TRACK_X = 100;
     private static final int TRACK_Y = 11;
@@ -54,6 +56,8 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
 
         drawWave(guiGraphics);
         drawSlider(guiGraphics);
+
+        guiGraphics.blit(GRAPH_TEXTURE, this.leftPos+91, this.topPos+5, 4, 32, 4, 32);
     }
 
     private void drawWave(GuiGraphics guiGraphics) {
