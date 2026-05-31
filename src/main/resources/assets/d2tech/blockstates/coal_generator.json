@@ -1,8 +1,13 @@
 {
   "variants": {
-    "facing=north": { "model": "d2tech:block/coal_generator", "y": 0 },
-    "facing=east":  { "model": "d2tech:block/coal_generator", "y": 90 },
-    "facing=south": { "model": "d2tech:block/coal_generator", "y": 180 },
-    "facing=west":  { "model": "d2tech:block/coal_generator", "y": 270 }
+    "facing=north,generating=false": { "model": "d2tech:block/coal_generator", "y": 0 },
+    "facing=east,generating=false":  { "model": "d2tech:block/coal_generator", "y": 90 },
+    "facing=south,generating=false": { "model": "d2tech:block/coal_generator", "y": 180 },
+    "facing=west,generating=false":  { "model": "d2tech:block/coal_generator", "y": 270 },
+
+    "facing=north,generating=true": { "model": "d2tech:block/coal_generator_active", "y": 0 },
+    "facing=east,generating=true":  { "model": "d2tech:block/coal_generator_active", "y": 90 },
+    "facing=south,generating=true": { "model": "d2tech:block/coal_generator_active", "y": 180 },
+    "facing=west,generating=true":  { "model": "d2tech:block/coal_generator_active", "y": 270 }
   }
 }

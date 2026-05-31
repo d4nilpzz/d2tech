@@ -6,8 +6,6 @@ import dev.d4nilpzz.d2tech.registry._BlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.SimpleMenuProvider;
@@ -67,25 +65,6 @@ public class CoalGeneratorBlock extends BaseEntityBlock {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(GENERATING).add(FACING);
-    }
-
-    @Override
-    public void onPlace(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState oldState, boolean moved) {
-        if (!level.isClientSide) {
-            level.scheduleTick(pos, this, 5);
-        }
-    }
-
-    @Override
-    protected void tick(BlockState state, ServerLevel level, @NotNull BlockPos pos, @NotNull RandomSource random) {
-        boolean shouldGenerate = level.isDay();
-
-        if (state.getValue(GENERATING) != shouldGenerate) {
-            level.setBlock(pos, state.setValue(GENERATING, shouldGenerate), 3);
-        }
-
-
-        level.scheduleTick(pos, this, 5);
     }
 
     @Nullable

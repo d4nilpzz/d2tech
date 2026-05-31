@@ -57,10 +57,10 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
     }
 
     private void drawWave(GuiGraphics guiGraphics) {
-        int bx = this.leftPos + 48;
-        int by = this.topPos + 15;
+        int bx = this.leftPos + 45;
+        int by = this.topPos + 24;
         int centerY = by + 4;
-        int w = 40;
+        int w = 50;
         long time = minecraft != null ? minecraft.level != null ? minecraft.level.getGameTime() : 0 : 0;
         double offset = (time % 20) / 20.0 * Math.PI * 2;
 

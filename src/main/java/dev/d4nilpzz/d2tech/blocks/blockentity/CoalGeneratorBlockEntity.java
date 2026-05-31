@@ -1,6 +1,7 @@
 package dev.d4nilpzz.d2tech.blocks.blockentity;
 
 import dev.d4nilpzz.d2tech.blocks.base.BaseGeneratorBlockEntity;
+import dev.d4nilpzz.d2tech.blocks.custom.CoalGeneratorBlock;
 import dev.d4nilpzz.d2tech.energy.EnergyUtils;
 import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
@@ -113,6 +114,11 @@ public class CoalGeneratorBlockEntity extends BaseGeneratorBlockEntity implement
         chargeBattery();
 
         EnergyUtils.distributeNearly(this, ENERGY_STORAGE, 100);
+
+        boolean generating = burnTime > 0;
+        if (state.getValue(CoalGeneratorBlock.GENERATING) != generating) {
+            level.setBlock(pos, state.setValue(CoalGeneratorBlock.GENERATING, generating), 3);
+        }
     }
 
     private void chargeBattery() {
