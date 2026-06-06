@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
+    "A": {
+      "item": "d2tech:chip"
+    },
     "B": {
       "item": "d2tech:structure_block"
-    },
-    "C": {
-      "item": "d2tech:chip"
     },
     "F": {
       "item": "minecraft:furnace"
@@ -19,9 +19,9 @@
     }
   },
   "pattern": [
-    "SFS",
-    "CBG",
-    "SFS"
+    "AFA",
+    "ABG",
+    "SSS"
   ],
   "result": {
     "count": 1,

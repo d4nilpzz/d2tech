@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "d2tech:item/crude_oil_bucket"
+  }
+}

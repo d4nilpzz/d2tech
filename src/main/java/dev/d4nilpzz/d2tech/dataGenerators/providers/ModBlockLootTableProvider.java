@@ -41,6 +41,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(_Blocks.ANTENNA_BLOCK.get());
         dropSelf(_Blocks.ANTENNA_CONTROLLER.get());
 
+        dropSelf(_Blocks.WARNING_LIGHT.get());
         dropSelf(_Blocks.ADVANCED_CRAFTING_TABLE.get());
 
         add(_Blocks.STEEL_ORE.get(),

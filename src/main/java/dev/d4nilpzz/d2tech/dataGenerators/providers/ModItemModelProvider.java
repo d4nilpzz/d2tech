@@ -17,6 +17,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         basicItem(_Items.STEEL.get());
+        basicItem(_Items.ALUMINUM_SHEET.get());
         basicItem(_Items.RAW_STEEL.get());
 
         basicItem(_Items.ALUMINUM.get());
@@ -34,6 +35,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         // Advanced Crafting Table block item
         withExistingParent(_Blocks.ADVANCED_CRAFTING_TABLE.getId().getPath(), modLoc("block/advanced_crafting_table"));
 
-        // Recipe memory items use manual models in src/main/resources
+        // Recipe memory
     }
 }

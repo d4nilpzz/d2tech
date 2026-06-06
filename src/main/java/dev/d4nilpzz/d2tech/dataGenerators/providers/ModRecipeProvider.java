@@ -207,6 +207,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 )
                 .unlockedBy("has_plastic_pellet", has(_Items.PLASTIC_PELLET))
                 .save(recipeOutput);
+
+        HydraulicPressRecipeBuilder.press(
+                        Ingredient.of(_Items.ALUMINUM.get()),
+                        new ItemStack(_Items.ALUMINUM_SHEET.get(), 1),
+                        2000, 150
+                )
+                .unlockedBy("has_aluminum", has(_Items.ALUMINUM))
+                .save(recipeOutput);
     }
 
     protected static void oreSmelting(@NotNull RecipeOutput recipeOutput, List<ItemLike> pIngredients, @NotNull RecipeCategory pCategory, @NotNull ItemLike pResult,

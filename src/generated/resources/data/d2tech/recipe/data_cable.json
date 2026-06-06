@@ -10,7 +10,9 @@
     }
   },
   "pattern": [
-    "RSR"
+    " S ",
+    "SRS",
+    " S "
   ],
   "result": {
     "count": 4,

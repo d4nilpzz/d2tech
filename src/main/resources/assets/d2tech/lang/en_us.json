@@ -1,6 +1,7 @@
 {
   "itemGroup.d2tech": "d2tech",
   "itemGroup.d2tech_ores": "d2tech Ores",
+  "itemGroup.d2tech_recipes": "d2tech Recipes",
 
   "tooltip.d2tech.item_extra_info": "Hold shift for more info.",
 
@@ -25,10 +26,12 @@
   "block.d2tech.antenna_block": "Antenna Block",
   "block.d2tech.antenna_controller": "Antenna Controller",
 
+  "block.d2tech.warning_light": "Warning Light",
   "block.d2tech.advanced_crafting_table": "Advanced Crafting Table",
 
   "item.d2tech.raw_steel": "Raw Steel",
   "item.d2tech.steel": "Steel Ingot",
+  "item.d2tech.aluminum_sheet": "Aluminum Sheet",
 
   "item.d2tech.raw_aluminum": "Raw Aluminum",
   "item.d2tech.aluminum": "Aluminum Ingot",
@@ -49,5 +52,14 @@
   "item.d2tech.satellite_engine_memory": "Satellite Engine Recipe",
   "item.d2tech.satellite_body_recipe_memory": "Satellite Body Recipe",
   "item.d2tech.satellite_advanced_space_chip_memory": "Advanced Space Chip Recipe",
-  "item.d2tech.satellite_solar_panel_recipe_memory": "Satellite Solar Panel Recipe"
+  "item.d2tech.satellite_solar_panel_recipe_memory": "Satellite Solar Panel Recipe",
+
+  "fluid_type.d2tech.crude_oil": "Crude Oil",
+  "fluid_type.d2tech.fuel": "Fuel",
+
+  "block.d2tech.crude_oil": "Crude Oil",
+  "block.d2tech.fuel": "Fuel",
+
+  "item.d2tech.crude_oil_bucket": "Crude Oil Bucket",
+  "item.d2tech.fuel_bucket": "Fuel Bucket"
 }

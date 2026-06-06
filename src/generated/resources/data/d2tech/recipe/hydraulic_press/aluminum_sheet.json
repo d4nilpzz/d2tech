@@ -1,0 +1,12 @@
+{
+  "type": "d2tech:hydraulic_press",
+  "energy": 2000,
+  "ingredient": {
+    "item": "d2tech:aluminum"
+  },
+  "result": {
+    "count": 3,
+    "id": "d2tech:aluminum_sheet"
+  },
+  "time": 150
+}

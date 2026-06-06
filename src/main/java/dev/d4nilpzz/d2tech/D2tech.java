@@ -3,6 +3,7 @@ package dev.d4nilpzz.d2tech;
 import com.mojang.logging.LogUtils;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
 import dev.d4nilpzz.d2tech.registry._Blocks;
+import dev.d4nilpzz.d2tech.registry._Fluids;
 import dev.d4nilpzz.d2tech.registry._Items;
 import dev.d4nilpzz.d2tech.registry._RecipeTypes;
 import dev.d4nilpzz.d2tech.screen._MenuTypes;
@@ -18,6 +19,7 @@ public class D2tech {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public D2tech(IEventBus modEventBus, ModContainer modContainer) {
+        _Fluids.register(modEventBus);
         _Items.register(modEventBus);
         _Blocks.register(modEventBus);
         _BlockEntities.register(modEventBus);

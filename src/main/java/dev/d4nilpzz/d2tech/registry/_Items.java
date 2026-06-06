@@ -1,7 +1,6 @@
 package dev.d4nilpzz.d2tech.registry;
 
 import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
-import dev.d4nilpzz.d2tech.item.custom.BatteryItem;
 import dev.d4nilpzz.d2tech.item.custom.Configurator;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -9,12 +8,17 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 import static dev.d4nilpzz.d2tech.D2tech.MODID;
 
 public class _Items {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
     public static final DeferredItem<Item> STEEL = ITEMS.register("steel",
+            () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> ALUMINUM_SHEET = ITEMS.register("aluminum_sheet",
             () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> RAW_STEEL = ITEMS.register("raw_steel",
@@ -61,6 +65,10 @@ public class _Items {
 
     public static final DeferredItem<Item> SATELLITE_SOLAR_PANEL_RECIPE_MEMORY = ITEMS.register("satellite_solar_panel_recipe_memory",
             () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE)));
+
+    public static <T extends Item> Supplier<T> registerBucket(String name, Supplier<T> bucket) {
+        return ITEMS.register(name, bucket);
+    }
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

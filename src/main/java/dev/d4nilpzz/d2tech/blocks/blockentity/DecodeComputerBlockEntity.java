@@ -126,6 +126,10 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
         return antennaLevel;
     }
 
+    public boolean getActive() {
+        return getBlockState().getValue(DecodeComputerBlock.ACTIVE);
+    }
+
     public boolean tryCreateRecipe() {
         if (!hasRecipe()) return false;
         if (level == null || level.isClientSide()) return false;

@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,on=false": { "model": "d2tech:block/warning_light", "y": 0 },
+    "facing=east,on=false":  { "model": "d2tech:block/warning_light", "y": 90 },
+    "facing=south,on=false": { "model": "d2tech:block/warning_light", "y": 180 },
+    "facing=west,on=false":  { "model": "d2tech:block/warning_light", "y": 270 },
+
+    "facing=north,on=true": { "model": "d2tech:block/warning_light_on", "y": 0 },
+    "facing=east,on=true":  { "model": "d2tech:block/warning_light_on", "y": 90 },
+    "facing=south,on=true": { "model": "d2tech:block/warning_light_on", "y": 180 },
+    "facing=west,on=true":  { "model": "d2tech:block/warning_light_on", "y": 270 }
+  }
+}

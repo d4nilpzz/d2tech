@@ -7,6 +7,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DropExperienceBlock;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.bus.api.IEventBus;
@@ -74,6 +75,12 @@ public class _Blocks {
                     .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)));
 
 
+    // Warning Light
+    public static final DeferredBlock<WarningLightBlock> WARNING_LIGHT = registerBlock("warning_light",
+            () -> new WarningLightBlock(BlockBehaviour.Properties.of()
+                    .strength(4f).requiresCorrectToolForDrops().sound(SoundType.METAL)
+                    .lightLevel(state -> state.getValue(WarningLightBlock.ON) ? 8 : 0)));
+
     // Advanced Crafting Table
     public static final DeferredBlock<AdvancedCraftingTableBlock> ADVANCED_CRAFTING_TABLE = registerBlock("advanced_crafting_table",
             () -> new AdvancedCraftingTableBlock(BlockBehaviour.Properties.of()
@@ -111,6 +118,10 @@ public class _Blocks {
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
         _Items.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    public static <T extends LiquidBlock> Supplier<T> registerFluidBlock(String name, Supplier<T> block) {
+        return BLOCKS.register(name, block);
     }
 
     public static void register(IEventBus eventBus) {

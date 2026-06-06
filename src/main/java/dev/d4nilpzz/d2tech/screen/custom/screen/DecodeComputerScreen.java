@@ -20,6 +20,8 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
             ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/slide.png");
     private static final ResourceLocation GRAPH_TEXTURE =
             ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/graph.png");
+    private static final ResourceLocation ACTIVE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath(MODID, "textures/gui/overlay/active.png");
 
     private static final int TRACK_X = 100;
     private static final int TRACK_Y = 11;
@@ -57,17 +59,20 @@ public class DecodeComputerScreen extends AbstractContainerScreen<DecodeComputer
         drawWave(guiGraphics);
         drawSlider(guiGraphics);
 
-        guiGraphics.blit(GRAPH_TEXTURE, this.leftPos+91, this.topPos+5, 4, 32, 4, 32);
+        if (menu.blockEntity.getActive()) {
+            guiGraphics.blit(ACTIVE_TEXTURE, this.leftPos+46, this.topPos+39, 0, 0, 40, 5, 40, 5);
+        }
+
+        guiGraphics.blit(GRAPH_TEXTURE, this.leftPos+91, this.topPos+13, 0, 0, 4, 32, 4, 32);
     }
 
     private void drawWave(GuiGraphics guiGraphics) {
-        int bx = this.leftPos + 45;
+        int bx = this.leftPos + 46;
         int by = this.topPos + 24;
         int centerY = by + 4;
-        int w = 50;
+        int w = 44;
         long time = minecraft != null ? minecraft.level != null ? minecraft.level.getGameTime() : 0 : 0;
         double offset = (time % 20) / 20.0 * Math.PI * 2;
-
         int val = sliderValue >= 0 ? sliderValue : Math.max(menu.blockEntity.getReceivedFrequency(), 1);
         if (val < 1) val = 1;
         if (val > POSITIONS) val = POSITIONS;

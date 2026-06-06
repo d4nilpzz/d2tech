@@ -1,6 +1,7 @@
 package dev.d4nilpzz.d2tech;
 
 import dev.d4nilpzz.d2tech.registry._Blocks;
+import dev.d4nilpzz.d2tech.registry._Fluids;
 import dev.d4nilpzz.d2tech.registry._Items;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -29,17 +30,28 @@ public class D2techTab {
                         output.accept(_Blocks.HYDRAULIC_PRESS.get());
                         output.accept(_Blocks.COAL_GENERATOR.get());
                         output.accept(_Blocks.DECODE_COMPUTER.get());
+                        output.accept(_Blocks.ADVANCED_CRAFTING_TABLE.get());
                         output.accept(_Blocks.SOLAR_GENERATOR.get());
                         output.accept(_Blocks.CABLE.get());
                         output.accept(_Blocks.DATA_CABLE.get());
-                        output.accept(_Blocks.ADVANCED_CRAFTING_TABLE.get());
+                        output.accept(_Blocks.WARNING_LIGHT.get());
                         output.accept(_Items.CONFIGURATOR.get());
                         output.accept(_Items.PLASTIC_PELLET.get());
                         output.accept(_Items.PLASTIC_SHEET.get());
                         output.accept(_Items.CHIP.get());
                         output.accept(_Items.ADVANCED_SPACE_SHIP.get());
                         output.accept(_Items.BATTERY.get());
+                        output.accept(_Items.ALUMINUM_SHEET.get());
                         output.accept(_Items.RECIPE_MEMORY.get());
+                        output.accept(_Fluids.CRUDE_OIL_BUCKET.get());
+                        output.accept(_Fluids.FUEL_BUCKET.get());
+                    })).build());
+
+    public static final Supplier<CreativeModeTab> REBUILD_TECH_RECIPES_CREATIVE_MODE_TAB =
+            CREATIVE_MODE_TAB.register("rebuild_tech_recipes_creative_mode_tab",
+            () -> CreativeModeTab.builder().icon(() -> new ItemStack(_Items.RECIPE_MEMORY.get()))
+                    .title(Component.translatable("itemGroup.d2tech_recipes"))
+                    .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(_Items.SATELLITE_ENGINE_MEMORY.get());
                         output.accept(_Items.SATELLITE_BODY_RECIPE_MEMORY.get());
                         output.accept(_Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get());
