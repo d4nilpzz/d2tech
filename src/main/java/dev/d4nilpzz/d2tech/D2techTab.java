@@ -24,6 +24,24 @@ public class D2techTab {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(_Blocks.STRUCTURE_BLOCK.get()))
                     .title(Component.translatable("itemGroup.d2tech"))
                     .displayItems(((itemDisplayParameters, output) -> {
+                        output.accept(_Items.CONFIGURATOR.get());
+                        output.accept(_Items.PLASTIC_PELLET.get());
+                        output.accept(_Items.PLASTIC_SHEET.get());
+                        output.accept(_Items.CHIP.get());
+                        output.accept(_Items.ADVANCED_SPACE_SHIP.get());
+                        output.accept(_Items.BATTERY.get());
+                        output.accept(_Items.ALUMINUM_SHEET.get());
+                        output.accept(_Items.RAW_STEEL.get());
+                        output.accept(_Items.STEEL.get());
+                        output.accept(_Items.RAW_ALUMINUM.get());
+                        output.accept(_Items.ALUMINUM.get());
+                        output.accept(_Items.RECIPE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_ENGINE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_BODY_RECIPE_MEMORY.get());
+                        output.accept(_Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get());
+                        output.accept(_Items.SATELLITE_SOLAR_PANEL_RECIPE_MEMORY.get());
+                        output.accept(_Fluids.CRUDE_OIL_BUCKET.get());
+                        output.accept(_Fluids.FUEL_BUCKET.get());
                         output.accept(_Blocks.STRUCTURE_BLOCK.get());
                         output.accept(_Blocks.ANTENNA_BLOCK.get());
                         output.accept(_Blocks.ANTENNA_CONTROLLER.get());
@@ -35,42 +53,10 @@ public class D2techTab {
                         output.accept(_Blocks.CABLE.get());
                         output.accept(_Blocks.DATA_CABLE.get());
                         output.accept(_Blocks.WARNING_LIGHT.get());
-                        output.accept(_Items.CONFIGURATOR.get());
-                        output.accept(_Items.PLASTIC_PELLET.get());
-                        output.accept(_Items.PLASTIC_SHEET.get());
-                        output.accept(_Items.CHIP.get());
-                        output.accept(_Items.ADVANCED_SPACE_SHIP.get());
-                        output.accept(_Items.BATTERY.get());
-                        output.accept(_Items.ALUMINUM_SHEET.get());
-                        output.accept(_Items.RECIPE_MEMORY.get());
-                        output.accept(_Fluids.CRUDE_OIL_BUCKET.get());
-                        output.accept(_Fluids.FUEL_BUCKET.get());
-                    })).build());
-
-    public static final Supplier<CreativeModeTab> REBUILD_TECH_RECIPES_CREATIVE_MODE_TAB =
-            CREATIVE_MODE_TAB.register("rebuild_tech_recipes_creative_mode_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(_Items.RECIPE_MEMORY.get()))
-                    .title(Component.translatable("itemGroup.d2tech_recipes"))
-                    .displayItems(((itemDisplayParameters, output) -> {
-                        output.accept(_Items.SATELLITE_ENGINE_MEMORY.get());
-                        output.accept(_Items.SATELLITE_BODY_RECIPE_MEMORY.get());
-                        output.accept(_Items.SATELLITE_ADVANCED_SPACE_CHIP_MEMORY.get());
-                        output.accept(_Items.SATELLITE_SOLAR_PANEL_RECIPE_MEMORY.get());
-                    })).build());
-
-    public static final Supplier<CreativeModeTab> REBUILD_TECH_INTERCEPTOR_CREATIVE_MODE_TAB =
-            CREATIVE_MODE_TAB.register("rebuild_tech_interceptor_creative_mode_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(_Items.STEEL.get()))
-                    .title(Component.translatable("itemGroup.d2tech_ores"))
-                    .displayItems(((itemDisplayParameters, output) -> {
                         output.accept(_Blocks.STEEL_DEEPSLATE_ORE.get());
                         output.accept(_Blocks.STEEL_ORE.get());
-                        output.accept(_Items.RAW_STEEL.get());
-                        output.accept(_Items.STEEL.get());
                         output.accept(_Blocks.ALUMINUM_DEEPSLATE_ORE.get());
                         output.accept(_Blocks.ALUMINUM_ORE.get());
-                        output.accept(_Items.RAW_ALUMINUM.get());
-                        output.accept(_Items.ALUMINUM.get());
                     })).build());
 
     public static void register(IEventBus eventBus) {

@@ -231,5 +231,16 @@ public class DecodeComputerBlockEntity extends BlockEntity implements MenuProvid
     }
 
     public void tick(Level level, BlockPos blockPos, BlockState state) {
+        if (state.getValue(DecodeComputerBlock.ACTIVE)) {
+            int energy = ENERGY_STORAGE.getEnergyStored();
+            System.out.println("[DC] tick energy=" + energy + " recipeIdx=" + recipeIndex);
+            if (energy >= 1000) {
+                ENERGY_STORAGE.internalExtract(1000, false);
+            } else {
+                level.setBlock(blockPos, state.setValue(DecodeComputerBlock.ACTIVE, false), 3);
+                recipeIndex = -1;
+                setChanged();
+            }
+        }
     }
 }

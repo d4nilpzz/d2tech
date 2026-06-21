@@ -104,7 +104,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("SSS")
                 .define('S', _Items.STEEL.get())
                 .define('F', Items.FURNACE)
-                .define('A', _Items.CHIP.get())
+                .define('A', _Items.ALUMINUM.get())
                 .define('B', _Blocks.STRUCTURE_BLOCK.get())
                 .define('G', _Items.BATTERY.get())
                 .unlockedBy("has_chip", has(_Items.CHIP)).save(recipeOutput);

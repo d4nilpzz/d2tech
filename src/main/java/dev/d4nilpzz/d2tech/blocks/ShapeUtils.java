@@ -3,9 +3,9 @@ package dev.d4nilpzz.d2tech.blocks;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ShapeUtils {
-    public static VoxelShape rotateShapeY(VoxelShape shape, int degrees) {
+    public static VoxelShape rotateShapeY(VoxelShape shape, Rotation rotation) {
         VoxelShape[] buffer = new VoxelShape[]{shape, net.minecraft.world.phys.shapes.Shapes.empty()};
-        int times = (degrees / 90) % 4;
+        int times = (rotation.degrees / 90) % 4;
         for (int i = 0; i < times; i++) {
             buffer[0].forAllBoxes((minX, minY, minZ, maxX, maxY, maxZ) ->
                     buffer[1] = net.minecraft.world.phys.shapes.Shapes.or(buffer[1],

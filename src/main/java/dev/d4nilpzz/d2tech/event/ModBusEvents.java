@@ -3,6 +3,7 @@ package dev.d4nilpzz.d2tech.event;
 import dev.d4nilpzz.d2tech.D2tech;
 import dev.d4nilpzz.d2tech.blocks.blockentity.AdvancedCraftingTableBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.AntennaControllerBlockEntity;
+import dev.d4nilpzz.d2tech.blocks.blockentity.CableBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.CoalGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.DecodeComputerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.HydraulicPressBlockEntity;
@@ -34,6 +35,8 @@ public class ModBusEvents {
 
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, _BlockEntities.ADVANCED_CRAFTING_TABLE_BE.get(), AdvancedCraftingTableBlockEntity::getItemHandler);
         event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, _BlockEntities.ADVANCED_CRAFTING_TABLE_BE.get(), AdvancedCraftingTableBlockEntity::getEnergyStorage);
+
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, _BlockEntities.CABLE_BE.get(), CableBlockEntity::getEnergyStorage);
 
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> BatteryItem.getEnergyStorage(stack), _Items.BATTERY.get());
         event.registerItem(Capabilities.EnergyStorage.ITEM, (stack, ctx) -> Configurator.getEnergyStorage(stack), _Items.CONFIGURATOR.get());

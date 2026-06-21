@@ -2,6 +2,7 @@ package dev.d4nilpzz.d2tech.registry;
 
 import dev.d4nilpzz.d2tech.blocks.blockentity.AdvancedCraftingTableBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.AntennaControllerBlockEntity;
+import dev.d4nilpzz.d2tech.blocks.blockentity.CableBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.CoalGeneratorBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.DecodeComputerBlockEntity;
 import dev.d4nilpzz.d2tech.blocks.blockentity.HydraulicPressBlockEntity;
@@ -42,6 +43,10 @@ public class _BlockEntities {
     public static final Supplier<BlockEntityType<AdvancedCraftingTableBlockEntity>> ADVANCED_CRAFTING_TABLE_BE =
             BLOCK_ENTITIES.register("advanced_crafting_table", () -> BlockEntityType.Builder.of(
                     AdvancedCraftingTableBlockEntity::new, _Blocks.ADVANCED_CRAFTING_TABLE.get()).build(null));
+
+    public static final Supplier<BlockEntityType<CableBlockEntity>> CABLE_BE =
+            BLOCK_ENTITIES.register("cable", () -> BlockEntityType.Builder.of(
+                    CableBlockEntity::new, _Blocks.CABLE.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

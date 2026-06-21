@@ -1,6 +1,7 @@
 package dev.d4nilpzz.d2tech.blocks.custom;
 
 import com.mojang.serialization.MapCodec;
+import dev.d4nilpzz.d2tech.blocks.Rotation;
 import dev.d4nilpzz.d2tech.blocks.ShapeUtils;
 import dev.d4nilpzz.d2tech.blocks.blockentity.DecodeComputerBlockEntity;
 import dev.d4nilpzz.d2tech.registry._BlockEntities;
@@ -75,9 +76,9 @@ public class DecodeComputerBlock extends BaseEntityBlock {
         Direction dir = state.getValue(FACING);
 
         return switch (dir) {
-            case EAST -> ShapeUtils.rotateShapeY(SHAPE, 90);
-            case SOUTH -> ShapeUtils.rotateShapeY(SHAPE, 180);
-            case WEST -> ShapeUtils.rotateShapeY(SHAPE, 270);
+            case EAST -> ShapeUtils.rotateShapeY(SHAPE, Rotation.R90);
+            case SOUTH -> ShapeUtils.rotateShapeY(SHAPE, Rotation.R180);
+            case WEST -> ShapeUtils.rotateShapeY(SHAPE, Rotation.R270);
             default -> SHAPE;
         };
     }

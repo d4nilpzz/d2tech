@@ -1,5 +1,6 @@
 package dev.d4nilpzz.d2tech.blocks.base;
 
+import com.mojang.serialization.MapCodec;
 import dev.d4nilpzz.d2tech.registry._Items;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,7 +12,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,7 +29,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import org.jetbrains.annotations.NotNull;
 
-public class BaseCableBlock extends Block {
+public abstract class BaseCableBlock extends BaseEntityBlock {
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     public static final BooleanProperty EAST  = BooleanProperty.create("east");
@@ -61,11 +64,16 @@ public class BaseCableBlock extends Block {
     private final TagKey<Block> connectableBlocks;
 
 
-    /*
-    * Waterlogear el cable para que pueda estar dentro de lava y agua.
-    */
+    @Override
+    protected abstract @NotNull MapCodec<? extends BaseEntityBlock> codec();
+
+    @Override
+    public @NotNull RenderShape getRenderShape(@NotNull BlockState state) {
+        return RenderShape.MODEL;
+    }
+
     public BaseCableBlock(BlockBehaviour.Properties properties, TagKey<Block> tagKey) {
-        super(properties.forceSolidOn());
+        super(properties);
         this.connectableBlocks = tagKey;
 
         this.registerDefaultState(this.stateDefinition.any()
